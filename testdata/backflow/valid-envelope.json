@@ -1,0 +1,58 @@
+{
+  "schema_version": "northstar.learning-need-envelope/v1alpha1",
+  "kind": "LearningNeedEnvelope",
+  "need_id": "fixture:understand-elf-runtime",
+  "revision": 1,
+  "producer_repository": "GodParticles1/Relay",
+  "target_repository": "GodParticles1/Forge",
+  "sources": [
+    {
+      "source_ref": {
+        "schema_version": "northstar.source-ref/v1alpha1",
+        "kind": "SourceRef",
+        "source_id": "fixture:elf-runtime",
+        "repository": "GodParticles1/xrocket-product-knowledge",
+        "commit_sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "path": "knowledge/synthetic/elf-runtime.md",
+        "authority": "canonical",
+        "locator": {
+          "kind": "claim",
+          "value": "loader-mode"
+        },
+        "source_status": "confirmed_controlled_test"
+      },
+      "summary": "Synthetic claim: executable runtime dependencies can differ from package state.",
+      "scope": "Synthetic fixture only; no actual incident or learner assessment.",
+      "limitations": "The fake commit and path are not asserted to exist."
+    },
+    {
+      "source_ref": {
+        "schema_version": "northstar.source-ref/v1alpha1",
+        "kind": "SourceRef",
+        "source_id": "fixture:history-elf-runtime",
+        "repository": "GodParticles1/chat-memory",
+        "commit_sha": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "path": "history/synthetic/elf-session.md",
+        "authority": "historical_context",
+        "locator": {
+          "kind": "claim",
+          "value": "loader-mode"
+        },
+        "source_status": "unresolved"
+      },
+      "summary": "Synthetic historical context contains an unresolved observation."
+    }
+  ],
+  "objective": "Explain how an ELF interpreter dependency affects startup.",
+  "rationale": "The synthetic source illustrates the distinction between installation and runtime evidence.",
+  "acceptance": [
+    "Return a target-owned disposition: accept, defer, or reject with rationale; if accepted, identify the proposed learning artifact."
+  ],
+  "does_not_prove": [
+    "source fact != learner mastery",
+    "envelope valid != target accepted",
+    "target accepted != Proof evidence",
+    "source similarity != applicability"
+  ],
+  "payload_sha256": "592fe89ca6d01122e6523edc6b56817c472434492deee2d1ee815000c85c9fb6"
+}

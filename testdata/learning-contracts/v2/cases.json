@@ -1,0 +1,59 @@
+{
+  "schema_version": "1.0.0",
+  "cases": [
+    {
+      "name": "valid-catalog",
+      "catalog": "valid/catalog.json",
+      "expected_exit_code": 0,
+      "expected_error_codes": []
+    },
+    {
+      "name": "duplicate-unit-id",
+      "catalog": "invalid/duplicate-unit-id.json",
+      "expected_exit_code": 1,
+      "expected_error_codes": ["DUPLICATE_UNIT_ID"]
+    },
+    {
+      "name": "prerequisite-cycle",
+      "catalog": "invalid/prerequisite-cycle.json",
+      "expected_exit_code": 1,
+      "expected_error_codes": ["PREREQUISITE_CYCLE"]
+    },
+    {
+      "name": "unresolved-resource-ref",
+      "catalog": "invalid/unresolved-resource-ref.json",
+      "expected_exit_code": 1,
+      "expected_error_codes": ["UNRESOLVED_RESOURCE_REF"]
+    },
+    {
+      "name": "unresolved-unit-ref",
+      "catalog": "invalid/unresolved-unit-ref.json",
+      "expected_exit_code": 1,
+      "expected_error_codes": ["UNRESOLVED_LEARNING_UNIT_REF"]
+    },
+    {
+      "name": "owner-violation",
+      "catalog": "invalid/owner-violation.json",
+      "expected_exit_code": 1,
+      "expected_error_codes": ["OWNER_VIOLATION"]
+    },
+    {
+      "name": "missing-evidence-target",
+      "catalog": "invalid/missing-evidence-target.json",
+      "expected_exit_code": 1,
+      "expected_error_codes": ["MISSING_EVIDENCE_TARGET"]
+    },
+    {
+      "name": "unresolved-evidence-ref",
+      "catalog": "invalid/unresolved-evidence-ref.json",
+      "expected_exit_code": 1,
+      "expected_error_codes": ["UNRESOLVED_EVIDENCE_REF"]
+    },
+    {
+      "name": "invalid-revision",
+      "catalog": "invalid/invalid-revision.json",
+      "expected_exit_code": 1,
+      "expected_error_codes": ["SCHEMA_INVALID"]
+    }
+  ]
+}

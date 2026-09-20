@@ -1,0 +1,68 @@
+{
+  "task_id": "LS-P1-I1",
+  "contract_version": "2.0.0",
+  "northstar": {
+    "repository": "GodParticles1/Northstar",
+    "branch": "main",
+    "commit": "54ac7b96c8b2b55a9b001502e8c4f6622bef03bd",
+    "tree": "e689777dc5f28485f6f498b49ea951db2c60fe65"
+  },
+  "consumers": [
+    {
+      "repository": "GodParticles1/Forge",
+      "branch": "main",
+      "commit": "9010198f4797903a248ebbe02996b591d610ba83",
+      "tree": "2671db237122fbba82583f9c4b0fc9bc0b7e8e69",
+      "catalog_path": "catalogs/forge.catalog.json",
+      "catalog_git_blob": "1405a8b1662118500d81a067751c24718492618e",
+      "catalog_sha256": "00f3b12846e2e25f505f2cd713457f9f68fbcbd6c622646d1e65afcf4ac360b3",
+      "unit_ids": [
+        "forge.unit.deterministic-python-contracts",
+        "forge.unit.boundary-failure-test-evidence"
+      ]
+    },
+    {
+      "repository": "GodParticles1/Cortex",
+      "branch": "main",
+      "commit": "b36cc8bc6bcb8734b29ada95d7fd81b656d8397f",
+      "tree": "d9ca8307d2bc4a32b2c8b32dd470eecc501aa875",
+      "catalog_path": "catalogs/cortex.catalog.json",
+      "catalog_git_blob": "ca18930be2dfd3dc8b702dab4ace2a6e73f7dff3",
+      "catalog_sha256": "635f18c1c094a0f79423dbc4cdfb4e2aa4319d53d0bfd8a1da453f2b59b9c996",
+      "unit_ids": [
+        "cortex.unit.math-data-tensor-bridge",
+        "cortex.unit.reproducible-model-evaluation-fundamentals"
+      ]
+    },
+    {
+      "repository": "GodParticles1/Nimbus",
+      "branch": "main",
+      "commit": "f544b9066b75441ec81c9d72a418d30a4f128867",
+      "tree": "74d42288e7bed0a280ad76459763bd72339b7055",
+      "catalog_path": "catalogs/nimbus.catalog.json",
+      "catalog_git_blob": "28e18f84c321c3b733bfa7b379486452efca36a9",
+      "catalog_sha256": "a142cd4d5d9ca3655ade4260e7c38f80a2c46a5689e20a67bed942b9523fc294",
+      "unit_ids": [
+        "nimbus.unit.kubernetes-reconcile-mental-model",
+        "nimbus.unit.read-only-discovery-diagnosis-evidence"
+      ]
+    }
+  ],
+  "read_only_repositories": [
+    {
+      "repository": "GodParticles1/Proof",
+      "before": {"commit": "ed169724d5c89669b35dd66c99d3206da5c148be", "tree": "e2d5fd2300813ae7c9843d3430f0c03b0cb28892"},
+      "after": {"commit": "ed169724d5c89669b35dd66c99d3206da5c148be", "tree": "e2d5fd2300813ae7c9843d3430f0c03b0cb28892"}
+    },
+    {
+      "repository": "GodParticles1/Catalyst",
+      "before": {"commit": "486439690fc0119d83a3e1ef8230be5cf2f09f02", "tree": "21ac0fe15ec4a473a5560b55c80adacbbfab5ce9"},
+      "after": {"commit": "486439690fc0119d83a3e1ef8230be5cf2f09f02", "tree": "21ac0fe15ec4a473a5560b55c80adacbbfab5ce9"}
+    }
+  ],
+  "expected": {
+    "total_units": 6,
+    "units_per_consumer": 2,
+    "checks": ["cross_repository_reference_resolution", "ownership", "revision", "prerequisite_dag"]
+  }
+}

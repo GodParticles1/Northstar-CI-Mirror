@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0.0",
+  "items": [
+    {"id": "edge.001", "prerequisite_id": "skill.python.baseline", "skill_id": "skill.python.functions"},
+    {"id": "edge.002", "prerequisite_id": "skill.git.evidence", "skill_id": "skill.testing"},
+    {"id": "edge.003", "prerequisite_id": "skill.python.functions", "skill_id": "skill.testing"},
+    {"id": "edge.004", "prerequisite_id": "skill.python.functions", "skill_id": "skill.text.unicode"},
+    {"id": "edge.005", "prerequisite_id": "skill.text.unicode", "skill_id": "skill.code.decomposition"},
+    {"id": "edge.006", "prerequisite_id": "skill.code.decomposition", "skill_id": "skill.rules.boundaries"},
+    {"id": "edge.007", "prerequisite_id": "skill.rules.boundaries", "skill_id": "skill.collections"},
+    {"id": "edge.008", "prerequisite_id": "skill.collections", "skill_id": "skill.search.complexity"},
+    {"id": "edge.009", "prerequisite_id": "skill.testing", "skill_id": "skill.exceptions"},
+    {"id": "edge.010", "prerequisite_id": "skill.shell.safety", "skill_id": "skill.packaging.ci"},
+    {"id": "edge.011", "prerequisite_id": "skill.git.evidence", "skill_id": "skill.packaging.ci"},
+    {"id": "edge.012", "prerequisite_id": "skill.exceptions", "skill_id": "skill.packaging.ci"},
+    {"id": "edge.013", "prerequisite_id": "skill.packaging.ci", "skill_id": "skill.file.io"},
+    {"id": "edge.014", "prerequisite_id": "skill.file.io", "skill_id": "skill.serialization"},
+    {"id": "edge.015", "prerequisite_id": "skill.serialization", "skill_id": "skill.debugging.profiling"},
+    {"id": "edge.016", "prerequisite_id": "skill.collections", "skill_id": "skill.models"},
+    {"id": "edge.017", "prerequisite_id": "skill.models", "skill_id": "skill.cli"},
+    {"id": "edge.018", "prerequisite_id": "skill.cli", "skill_id": "skill.logging"},
+    {"id": "edge.019", "prerequisite_id": "skill.debugging.profiling", "skill_id": "skill.capstone.resource_linter"},
+    {"id": "edge.020", "prerequisite_id": "skill.logging", "skill_id": "skill.capstone.resource_linter"},
+    {"id": "edge.021", "prerequisite_id": "skill.search.complexity", "skill_id": "skill.capstone.resource_linter"}
+  ]
+}
+

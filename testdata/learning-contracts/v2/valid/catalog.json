@@ -1,0 +1,131 @@
+{
+  "contract_version": "2.0.0",
+  "resources": [
+    {
+      "kind": "ResourceRef",
+      "repository": "GodParticles1/Forge",
+      "id": "forge.resource.python-language-reference",
+      "revision": 1
+    }
+  ],
+  "evidence_targets": [
+    {
+      "kind": "EvidenceRef",
+      "repository": "GodParticles1/Proof",
+      "id": "proof.evidence.python-contracts",
+      "revision": 1
+    },
+    {
+      "kind": "EvidenceRef",
+      "repository": "GodParticles1/Proof",
+      "id": "proof.evidence.python-boundary-tests",
+      "revision": 1
+    }
+  ],
+  "experiment_targets": [
+    {
+      "kind": "ExperimentRef",
+      "repository": "GodParticles1/Catalyst",
+      "id": "catalyst.experiment.evaluation-baseline",
+      "revision": 1
+    }
+  ],
+  "units": [
+    {
+      "schema_version": "2.0.0",
+      "id": "forge.unit.python-contracts",
+      "owner_repository": "GodParticles1/Forge",
+      "revision": 1,
+      "status": "DRAFT",
+      "title": "Python function contracts",
+      "objective": "Implement and explain deterministic function input and output contracts.",
+      "prerequisites": [],
+      "resources": [
+        {
+          "kind": "ResourceRef",
+          "repository": "GodParticles1/Forge",
+          "id": "forge.resource.python-language-reference",
+          "revision": 1
+        }
+      ],
+      "exercise": {
+        "summary": "Implement a small pure function from a written contract.",
+        "deliverables": ["source", "explanation"]
+      },
+      "project_task": {
+        "kind": "practice",
+        "summary": "Use the function in a deterministic local fixture workflow."
+      },
+      "acceptance": ["normal and invalid inputs are explained"],
+      "evidence_target": {
+        "kind": "EvidenceRef",
+        "repository": "GodParticles1/Proof",
+        "id": "proof.evidence.python-contracts",
+        "revision": 1
+      },
+      "refresh": {
+        "checked_at": "2026-08-17",
+        "review_after": "2027-02-17",
+        "triggers": ["supported Python version changes"]
+      },
+      "limitations": ["Content readiness does not prove learner mastery."]
+    },
+    {
+      "schema_version": "2.0.0",
+      "id": "forge.unit.python-boundary-tests",
+      "owner_repository": "GodParticles1/Forge",
+      "revision": 1,
+      "status": "DRAFT",
+      "title": "Python boundary-focused tests",
+      "objective": "Design deterministic normal, boundary and invalid tests for a contract.",
+      "prerequisites": [
+        {
+          "kind": "LearningUnitRef",
+          "repository": "GodParticles1/Forge",
+          "id": "forge.unit.python-contracts",
+          "revision": 1
+        }
+      ],
+      "resources": [
+        {
+          "kind": "ResourceRef",
+          "repository": "GodParticles1/Forge",
+          "id": "forge.resource.python-language-reference",
+          "revision": 1
+        }
+      ],
+      "exercise": {
+        "summary": "Add tests that demonstrate success and controlled failure.",
+        "deliverables": ["tests", "failure record"]
+      },
+      "project_task": {
+        "kind": "practice",
+        "summary": "Replay the tests in a clean local environment."
+      },
+      "acceptance": ["normal, boundary and invalid paths are deterministic"],
+      "evidence_target": {
+        "kind": "EvidenceRef",
+        "repository": "GodParticles1/Proof",
+        "id": "proof.evidence.python-boundary-tests",
+        "revision": 1
+      },
+      "experiment_refs": [
+        {
+          "kind": "ExperimentRef",
+          "repository": "GodParticles1/Catalyst",
+          "id": "catalyst.experiment.evaluation-baseline",
+          "revision": 1
+        }
+      ],
+      "refresh": {
+        "checked_at": "2026-08-17",
+        "review_after": "2027-02-17",
+        "triggers": ["test framework contract changes"]
+      },
+      "limitations": [
+        "Passing reference tests does not prove independent authorship.",
+        "Referencing a Catalyst experiment does not claim that the experiment ran or passed."
+      ]
+    }
+  ]
+}

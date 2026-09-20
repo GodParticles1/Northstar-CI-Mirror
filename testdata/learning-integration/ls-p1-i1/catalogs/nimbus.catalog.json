@@ -1,0 +1,79 @@
+{
+  "contract_version": "2.0.0",
+  "resources": [
+    {"kind": "ResourceRef", "repository": "GodParticles1/Nimbus", "id": "nimbus.resource.kubernetes-v1-36-components", "revision": 1},
+    {"kind": "ResourceRef", "repository": "GodParticles1/Nimbus", "id": "nimbus.resource.kubernetes-v1-36-objects", "revision": 1},
+    {"kind": "ResourceRef", "repository": "GodParticles1/Nimbus", "id": "nimbus.resource.kubernetes-v1-36-controllers", "revision": 1},
+    {"kind": "ResourceRef", "repository": "GodParticles1/Nimbus", "id": "nimbus.resource.kubernetes-v1-36-kubectl-quick-reference", "revision": 1},
+    {"kind": "ResourceRef", "repository": "GodParticles1/Nimbus", "id": "nimbus.resource.kubernetes-v1-36-debug-pods", "revision": 1},
+    {"kind": "ResourceRef", "repository": "GodParticles1/Nimbus", "id": "nimbus.resource.kubernetes-v1-36-troubleshoot-clusters", "revision": 1}
+  ],
+  "evidence_targets": [
+    {"kind": "EvidenceRef", "repository": "GodParticles1/Proof", "id": "proof.evidence.nimbus-kubernetes-reconcile-mental-model", "revision": 1},
+    {"kind": "EvidenceRef", "repository": "GodParticles1/Proof", "id": "proof.evidence.nimbus-read-only-discovery-diagnosis", "revision": 1}
+  ],
+  "experiment_targets": [],
+  "units": [
+    {
+      "schema_version": "2.0.0",
+      "id": "nimbus.unit.kubernetes-reconcile-mental-model",
+      "owner_repository": "GodParticles1/Nimbus",
+      "revision": 1,
+      "status": "FINAL_REVIEW",
+      "title": "Kubernetes reconciliation mental model",
+      "objective": "Explain Kubernetes as API objects plus controllers that repeatedly compare desired and observed state, and locate the first control-plane and node responsibilities without claiming internals mastery.",
+      "prerequisites": [],
+      "resources": [
+        {"kind": "ResourceRef", "repository": "GodParticles1/Nimbus", "id": "nimbus.resource.kubernetes-v1-36-components", "revision": 1},
+        {"kind": "ResourceRef", "repository": "GodParticles1/Nimbus", "id": "nimbus.resource.kubernetes-v1-36-objects", "revision": 1},
+        {"kind": "ResourceRef", "repository": "GodParticles1/Nimbus", "id": "nimbus.resource.kubernetes-v1-36-controllers", "revision": 1}
+      ],
+      "exercise": {
+        "summary": "Given a fixed Deployment, ReplicaSet and Pod fixture plus two observed snapshots, identify desired state, observed state, controller responsibility and the next observation needed without running a mutation.",
+        "deliverables": ["learner-authored reconciliation trace", "component responsibility table", "two state-difference explanations", "unknowns and next-observation note"]
+      },
+      "project_task": {"kind": "practice", "summary": "Construct a deterministic paper/simulated reconciliation trace and distinguish scheduler placement from controller convergence and kubelet execution."},
+      "acceptance": [
+        "Desired state, observed state and reconciliation are explained using the supplied objects rather than slogans.",
+        "API server, etcd, scheduler, controller manager, kubelet and container runtime responsibilities are separated at an introductory level.",
+        "The trace does not claim that a controller executes containers or that the scheduler maintains replica count.",
+        "Unknown component internals are recorded as later study instead of guessed."
+      ],
+      "evidence_target": {"kind": "EvidenceRef", "repository": "GodParticles1/Proof", "id": "proof.evidence.nimbus-kubernetes-reconcile-mental-model", "revision": 1},
+      "refresh": {"checked_at": "2026-08-17", "review_after": "2026-11-17", "triggers": ["Kubernetes stable documentation moves beyond v1.36", "Core component or controller semantics used by the unit change", "Learner evidence exposes a missing prerequisite"]},
+      "limitations": ["Content readiness and a completed diagram do not prove learner mastery.", "The unit does not cover etcd operations, scheduler algorithms, controller source code, HA or production control-plane operation."]
+    },
+    {
+      "schema_version": "2.0.0",
+      "id": "nimbus.unit.read-only-discovery-diagnosis-evidence",
+      "owner_repository": "GodParticles1/Nimbus",
+      "revision": 1,
+      "status": "FINAL_REVIEW",
+      "title": "Read-only discovery, diagnosis and evidence",
+      "objective": "Collect bounded Kubernetes observations, separate facts from hypotheses and produce a redacted evidence report using only declared read-only commands against a disposable fixture environment.",
+      "prerequisites": [
+        {"kind": "LearningUnitRef", "repository": "GodParticles1/Nimbus", "id": "nimbus.unit.kubernetes-reconcile-mental-model", "revision": 1}
+      ],
+      "resources": [
+        {"kind": "ResourceRef", "repository": "GodParticles1/Nimbus", "id": "nimbus.resource.kubernetes-v1-36-kubectl-quick-reference", "revision": 1},
+        {"kind": "ResourceRef", "repository": "GodParticles1/Nimbus", "id": "nimbus.resource.kubernetes-v1-36-debug-pods", "revision": 1},
+        {"kind": "ResourceRef", "repository": "GodParticles1/Nimbus", "id": "nimbus.resource.kubernetes-v1-36-troubleshoot-clusters", "revision": 1}
+      ],
+      "exercise": {
+        "summary": "Against a prebuilt disposable failure fixture, use only get, describe, logs and events observations to produce a timestamped report; do not repair or mutate the cluster.",
+        "deliverables": ["environment and version record", "allowlisted command transcript", "expected-versus-actual observations", "fact/hypothesis table", "redacted evidence bundle", "cleanup/no-change statement"]
+      },
+      "project_task": {"kind": "practice", "summary": "Diagnose one bounded Pod scheduling or startup symptom through an observation chain and stop at the first unsupported conclusion."},
+      "acceptance": [
+        "Environment, Kubernetes/kubectl versions, fixture identity and observation timestamps are recorded.",
+        "Every executed command is in the read-only allowlist and the report records that no repair was attempted.",
+        "Facts, hypotheses and unverified explanations are clearly separated and sensitive output is redacted.",
+        "A second run over the same fixture produces the same normalized evidence apart from declared volatile fields.",
+        "The learner identifies what the evidence does and does not prove."
+      ],
+      "evidence_target": {"kind": "EvidenceRef", "repository": "GodParticles1/Proof", "id": "proof.evidence.nimbus-read-only-discovery-diagnosis", "revision": 1},
+      "refresh": {"checked_at": "2026-08-17", "review_after": "2026-11-17", "triggers": ["Kubernetes or kubectl stable moves beyond v1.36", "Selected read-only command output semantics change", "A fixture reveals an unsafe or ambiguous command boundary"]},
+      "limitations": ["Passing a deterministic fixture does not prove learner mastery or production-cluster diagnosis competence.", "No mutation, root-cause repair, live production access, CNI/CSI deep dive or HA diagnosis is included."]
+    }
+  ]
+}

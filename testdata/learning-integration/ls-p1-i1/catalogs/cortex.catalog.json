@@ -1,0 +1,78 @@
+{
+  "contract_version": "2.0.0",
+  "resources": [
+    {"kind": "ResourceRef", "repository": "GodParticles1/Cortex", "id": "cortex.resource.numpy-array-basics", "revision": 1},
+    {"kind": "ResourceRef", "repository": "GodParticles1/Cortex", "id": "cortex.resource.pytorch-2-13-tensors", "revision": 1},
+    {"kind": "ResourceRef", "repository": "GodParticles1/Cortex", "id": "cortex.resource.pytorch-2-13-autograd", "revision": 1},
+    {"kind": "ResourceRef", "repository": "GodParticles1/Cortex", "id": "cortex.resource.pytorch-reproducibility", "revision": 1},
+    {"kind": "ResourceRef", "repository": "GodParticles1/Cortex", "id": "cortex.resource.sklearn-1-9-model-evaluation", "revision": 1},
+    {"kind": "ResourceRef", "repository": "GodParticles1/Cortex", "id": "cortex.resource.sklearn-1-9-common-pitfalls", "revision": 1}
+  ],
+  "evidence_targets": [
+    {"kind": "EvidenceRef", "repository": "GodParticles1/Proof", "id": "proof.evidence.cortex-math-data-tensor-bridge", "revision": 1},
+    {"kind": "EvidenceRef", "repository": "GodParticles1/Proof", "id": "proof.evidence.cortex-reproducible-model-evaluation", "revision": 1}
+  ],
+  "experiment_targets": [],
+  "units": [
+    {
+      "schema_version": "2.0.0",
+      "id": "cortex.unit.math-data-tensor-bridge",
+      "owner_repository": "GodParticles1/Cortex",
+      "revision": 1,
+      "status": "FINAL_REVIEW",
+      "title": "Math, data and tensor bridge",
+      "objective": "Explain and implement the path from Python/NumPy data to PyTorch tensor shape, dtype, elementary operations and one small autograd example.",
+      "prerequisites": [],
+      "resources": [
+        {"kind": "ResourceRef", "repository": "GodParticles1/Cortex", "id": "cortex.resource.numpy-array-basics", "revision": 1},
+        {"kind": "ResourceRef", "repository": "GodParticles1/Cortex", "id": "cortex.resource.pytorch-2-13-tensors", "revision": 1},
+        {"kind": "ResourceRef", "repository": "GodParticles1/Cortex", "id": "cortex.resource.pytorch-2-13-autograd", "revision": 1}
+      ],
+      "exercise": {
+        "summary": "Create a CPU-only script that transforms a small numeric table into tensors, reports shape/dtype, performs documented operations and verifies one hand-computed gradient.",
+        "deliverables": ["learner-authored Python script", "small fixed input fixture", "shape/dtype table", "hand calculation", "replay output"]
+      },
+      "project_task": {"kind": "practice", "summary": "Trace every shape and operation in a deterministic local tensor calculation without GPU or downloaded data."},
+      "acceptance": [
+        "The learner explains scalar, vector, matrix, axis, shape and dtype in the submitted example.",
+        "NumPy and PyTorch results agree for the selected elementary operation.",
+        "One autograd gradient matches a hand calculation within an explicit tolerance.",
+        "The run uses a fixed local fixture and records library versions."
+      ],
+      "evidence_target": {"kind": "EvidenceRef", "repository": "GodParticles1/Proof", "id": "proof.evidence.cortex-math-data-tensor-bridge", "revision": 1},
+      "refresh": {"checked_at": "2026-08-17", "review_after": "2026-11-17", "triggers": ["PyTorch tutorial baseline changes", "Tensor/autograd APIs used by the exercise change", "Learner evidence exposes an unbridged prerequisite"]},
+      "limitations": ["Content readiness and a reference script do not prove learner mastery.", "This beginner bridge does not cover optimization, neural networks, Transformers or GPU execution."]
+    },
+    {
+      "schema_version": "2.0.0",
+      "id": "cortex.unit.reproducible-model-evaluation-fundamentals",
+      "owner_repository": "GodParticles1/Cortex",
+      "revision": 1,
+      "status": "FINAL_REVIEW",
+      "title": "Reproducible model and evaluation fundamentals",
+      "objective": "Build and evaluate one simple local baseline with fixed data/split/config, explicit metric semantics, leakage checks and reproducibility limitations.",
+      "prerequisites": [
+        {"kind": "LearningUnitRef", "repository": "GodParticles1/Cortex", "id": "cortex.unit.math-data-tensor-bridge", "revision": 1}
+      ],
+      "resources": [
+        {"kind": "ResourceRef", "repository": "GodParticles1/Cortex", "id": "cortex.resource.pytorch-reproducibility", "revision": 1},
+        {"kind": "ResourceRef", "repository": "GodParticles1/Cortex", "id": "cortex.resource.sklearn-1-9-model-evaluation", "revision": 1},
+        {"kind": "ResourceRef", "repository": "GodParticles1/Cortex", "id": "cortex.resource.sklearn-1-9-common-pitfalls", "revision": 1}
+      ],
+      "exercise": {
+        "summary": "Evaluate a simple CPU baseline on a bundled toy dataset using a fixed split and metric, then deliberately demonstrate and correct one leakage mistake.",
+        "deliverables": ["learner-authored evaluation script", "fixed local dataset", "config/version record", "metric result", "leakage failure and correction", "limitations note"]
+      },
+      "project_task": {"kind": "practice", "summary": "Replay the evaluation twice and distinguish exact code/data/config reproducibility from general model quality."},
+      "acceptance": [
+        "Data split, preprocessing boundary, seed/config and metric definition are explicit.",
+        "The leakage variant is detected and preserved as a negative example.",
+        "Two same-environment runs reproduce the declared result within the stated tolerance.",
+        "The report states that one toy baseline does not establish production or research quality."
+      ],
+      "evidence_target": {"kind": "EvidenceRef", "repository": "GodParticles1/Proof", "id": "proof.evidence.cortex-reproducible-model-evaluation", "revision": 1},
+      "refresh": {"checked_at": "2026-08-17", "review_after": "2026-11-17", "triggers": ["Evaluation library baseline changes", "Reproducibility guidance changes", "Learner evidence exposes a metric or leakage ambiguity"]},
+      "limitations": ["Passing the bundled evaluation does not prove learner mastery or model quality.", "No Catalyst experiment is created or claimed PASS by this unit.", "Transformers, LLMs, Agents and RL/post-training remain downstream topics."]
+    }
+  ]
+}

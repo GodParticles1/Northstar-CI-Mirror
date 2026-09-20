@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/GodParticles1/Northstar/schemas/v1alpha1/learning-need-envelope.schema.json",
+  "title": "LearningNeedEnvelope v1alpha1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "kind",
+    "need_id",
+    "revision",
+    "producer_repository",
+    "target_repository",
+    "sources",
+    "objective",
+    "rationale",
+    "acceptance",
+    "does_not_prove",
+    "payload_sha256"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "northstar.learning-need-envelope/v1alpha1"
+    },
+    "kind": {
+      "const": "LearningNeedEnvelope"
+    },
+    "need_id": {
+      "type": "string",
+      "maxLength": 128,
+      "pattern": "^[A-Za-z][A-Za-z0-9._:-]*(?![\\s\\S])"
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9007199254740991
+    },
+    "producer_repository": {
+      "type": "string",
+      "maxLength": 140,
+      "pattern": "^[A-Za-z0-9](?:[A-Za-z0-9-]{0,38})/[A-Za-z0-9_.-]+(?![\\s\\S])",
+      "not": {
+        "pattern": "/\\.{1,2}(?![\\s\\S])"
+      }
+    },
+    "target_repository": {
+      "type": "string",
+      "maxLength": 140,
+      "pattern": "^[A-Za-z0-9](?:[A-Za-z0-9-]{0,38})/[A-Za-z0-9_.-]+(?![\\s\\S])",
+      "not": {
+        "pattern": "/\\.{1,2}(?![\\s\\S])"
+      }
+    },
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 32,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "source_ref",
+          "summary"
+        ],
+        "properties": {
+          "source_ref": {
+            "$ref": "https://github.com/GodParticles1/Northstar/schemas/v1alpha1/source-ref.schema.json"
+          },
+          "summary": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000,
+            "pattern": "\\S"
+          },
+          "scope": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000,
+            "pattern": "\\S"
+          },
+          "limitations": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000,
+            "pattern": "\\S"
+          }
+        }
+      }
+    },
+    "objective": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2000,
+      "pattern": "\\S"
+    },
+    "rationale": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2000,
+      "pattern": "\\S"
+    },
+    "acceptance": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 32,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 2000,
+        "pattern": "\\S"
+      }
+    },
+    "does_not_prove": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 32,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 2000,
+        "pattern": "\\S"
+      },
+      "allOf": [
+        {
+          "contains": {
+            "const": "source fact != learner mastery"
+          }
+        },
+        {
+          "contains": {
+            "const": "envelope valid != target accepted"
+          }
+        },
+        {
+          "contains": {
+            "const": "target accepted != Proof evidence"
+          }
+        },
+        {
+          "contains": {
+            "const": "source similarity != applicability"
+          }
+        }
+      ]
+    },
+    "payload_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}(?![\\s\\S])"
+    }
+  }
+}

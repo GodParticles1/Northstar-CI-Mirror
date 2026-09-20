@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/GodParticles1/Northstar/schemas/v1alpha1/source-ref.schema.json",
+  "title": "SourceRef v1alpha1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "kind",
+    "source_id",
+    "repository",
+    "commit_sha",
+    "path",
+    "authority"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "northstar.source-ref/v1alpha1"
+    },
+    "kind": {
+      "const": "SourceRef"
+    },
+    "source_id": {
+      "type": "string",
+      "maxLength": 128,
+      "pattern": "^[A-Za-z][A-Za-z0-9._:-]*(?![\\s\\S])"
+    },
+    "repository": {
+      "type": "string",
+      "maxLength": 140,
+      "pattern": "^[A-Za-z0-9](?:[A-Za-z0-9-]{0,38})/[A-Za-z0-9_.-]+(?![\\s\\S])",
+      "not": {
+        "pattern": "/\\.{1,2}(?![\\s\\S])"
+      }
+    },
+    "commit_sha": {
+      "type": "string",
+      "pattern": "^[0-9a-fA-F]{40}(?![\\s\\S])"
+    },
+    "path": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1024,
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.{1,2}(?:/|$))(?!.*//)(?!.*[/]$)[^\\\\:\\u0000-\\u001f\\u007f]+(?![\\s\\S])"
+    },
+    "authority": {
+      "enum": [
+        "canonical",
+        "historical_context",
+        "evidence",
+        "unknown"
+      ]
+    },
+    "locator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "value"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "section",
+            "record",
+            "claim",
+            "line_range"
+          ]
+        },
+        "value": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "\\S"
+        }
+      }
+    },
+    "source_status": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "\\S"
+    }
+  }
+}

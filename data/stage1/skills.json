@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0.0",
+  "items": [
+    {"id": "skill.python.baseline", "name": "Python 无 AI 基线诊断", "stage_id": "S0", "status": "active", "description": "先冻结真实起点，再阅读资料和补课。"},
+    {"id": "skill.shell.safety", "name": "Shell 安全基础", "stage_id": "S0", "status": "active", "description": "路径、引用、权限、重定向和退出码。"},
+    {"id": "skill.git.evidence", "name": "Git 证据工作流", "stage_id": "S0", "status": "active", "description": "working tree、stage、commit、branch、diff、冲突和恢复。"},
+    {"id": "skill.python.functions", "name": "Python 函数与契约", "stage_id": "S0", "status": "active", "description": "变量、函数、参数、返回值和类型提示。"},
+    {"id": "skill.testing", "name": "自动化测试", "stage_id": "S0", "status": "active", "description": "正常、边界、非法输入与回归测试。"},
+    {"id": "skill.text.unicode", "name": "文本与 Unicode", "stage_id": "S0", "status": "active", "description": "字符串、数字转换、编码和规范化。"},
+    {"id": "skill.code.decomposition", "name": "函数分解与数据流", "stage_id": "S0", "status": "active", "description": "单一职责、输入输出和可测分层。"},
+    {"id": "skill.rules.boundaries", "name": "规则与边界", "stage_id": "S0", "status": "active", "description": "条件、布尔逻辑、真值表和边界。"},
+    {"id": "skill.collections", "name": "迭代与集合", "stage_id": "S0", "status": "active", "description": "循环、序列、字典、集合和嵌套记录。"},
+    {"id": "skill.search.complexity", "name": "查找与复杂度直觉", "stage_id": "S0", "status": "active", "description": "线性查找、二分前置和比较次数。"},
+    {"id": "skill.exceptions", "name": "异常契约", "stage_id": "S0", "status": "active", "description": "区分用户错误、环境错误和程序 bug。"},
+    {"id": "skill.packaging.ci", "name": "包、环境与最小 CI", "stage_id": "S0", "status": "active", "description": "module、venv、pyproject 和干净复现。"},
+    {"id": "skill.file.io", "name": "安全文件 I/O", "stage_id": "S0", "status": "active", "description": "pathlib、文本读写和路径边界。"},
+    {"id": "skill.serialization", "name": "JSON 与 CSV", "stage_id": "S0", "status": "active", "description": "统一记录、错误定位和 round-trip。"},
+    {"id": "skill.debugging.profiling", "name": "调试与测量", "stage_id": "S0", "status": "active", "description": "先红后绿、根因、回归和基础 benchmark 方法。"},
+    {"id": "skill.models", "name": "记录建模", "stage_id": "S0", "status": "active", "description": "dict 与 dataclass 的使用边界。"},
+    {"id": "skill.cli", "name": "CLI 契约", "stage_id": "S0", "status": "active", "description": "argparse、stdout/stderr 和退出码。"},
+    {"id": "skill.logging", "name": "日志与机器输出", "stage_id": "S0", "status": "active", "description": "日志不污染 JSON，且不泄露敏感数据。"},
+    {"id": "skill.capstone.resource_linter", "name": "Learning Resource Linter", "stage_id": "S0", "status": "active", "description": "以规格、测试、实现、CI、benchmark 和 release 完成 S0 闭环。"}
+  ]
+}
+

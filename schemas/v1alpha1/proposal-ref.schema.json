@@ -1,0 +1,16 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"urn:personal-tech-os:northstar:proposal-ref:v1alpha1",
+  "title":"Northstar ProposalRef v1alpha1",
+  "type":"object",
+  "additionalProperties":false,
+  "required":["schema_version","repository","object_type","object_id","object_contract_version","producer_revision"],
+  "properties":{
+    "schema_version":{"const":"northstar.proposal-ref/v1alpha1"},
+    "repository":{"const":"GodParticles1/Beacon"},
+    "object_type":{"const":"ProposalDraft"},
+    "object_id":{"type":"string","pattern":"^prop_[a-z0-9][a-z0-9._-]{2,63}$"},
+    "object_contract_version":{"const":"beacon.proposal-draft/v1alpha1"},
+    "producer_revision":{"type":"string","pattern":"^[0-9a-f]{40}$"}
+  }
+}

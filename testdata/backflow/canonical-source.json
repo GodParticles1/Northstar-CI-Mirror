@@ -1,0 +1,14 @@
+{
+  "schema_version": "northstar.source-ref/v1alpha1",
+  "kind": "SourceRef",
+  "source_id": "fixture:elf-runtime",
+  "repository": "GodParticles1/xrocket-product-knowledge",
+  "commit_sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "path": "knowledge/synthetic/elf-runtime.md",
+  "authority": "canonical",
+  "locator": {
+    "kind": "claim",
+    "value": "loader-mode"
+  },
+  "source_status": "confirmed_controlled_test"
+}

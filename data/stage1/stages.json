@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0.0",
+  "items": [
+    {"id": "S0", "name": "工程起点", "state": "active", "prerequisites": [], "non_goals": ["Go", "Rust", "Kubernetes 源码", "PyTorch", "平台中间件"]},
+    {"id": "S1", "name": "算法、离散与 C 桥梁", "state": "locked", "prerequisites": ["S0"]},
+    {"id": "S2a", "name": "操作系统最小核心", "state": "locked", "prerequisites": ["S1"]},
+    {"id": "S3a", "name": "Go 工程", "state": "locked", "prerequisites": ["S1", "S2a"]},
+    {"id": "S2b", "name": "网络与数据库核心", "state": "locked", "prerequisites": ["S3a"]},
+    {"id": "S3b", "name": "Kubernetes 开发", "state": "locked", "prerequisites": ["S3a", "S2b"]},
+    {"id": "S4a", "name": "分布式系统核心", "state": "locked", "prerequisites": ["S2b", "S3a"]},
+    {"id": "S4b", "name": "Kubernetes 源码与调度扩展", "state": "locked", "prerequisites": ["S3b"]},
+    {"id": "R-AI", "name": "AI Infra / ML Platform 就业桥梁", "state": "locked", "prerequisites": ["S3b"]},
+    {"id": "S5", "name": "数学与 PyTorch", "state": "locked", "prerequisites": ["S1"]},
+    {"id": "S6", "name": "Transformer 与 LLM", "state": "locked", "prerequisites": ["S5"]},
+    {"id": "S7", "name": "GPU 编程", "state": "locked", "prerequisites": ["S2a", "S6"]},
+    {"id": "S8", "name": "训练与推理系统", "state": "locked", "prerequisites": ["S4a", "S6", "S7"]},
+    {"id": "S9a", "name": "强化学习基础", "state": "locked", "prerequisites": ["S5", "S6"]},
+    {"id": "S9b", "name": "后训练与 Agent RL", "state": "locked", "prerequisites": ["S9a", "S6"]},
+    {"id": "S10", "name": "论文复现与研究", "state": "locked", "prerequisites": ["S8", "S9b"]}
+  ]
+}
+

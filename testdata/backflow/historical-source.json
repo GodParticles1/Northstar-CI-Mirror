@@ -1,0 +1,14 @@
+{
+  "schema_version": "northstar.source-ref/v1alpha1",
+  "kind": "SourceRef",
+  "source_id": "fixture:history-elf-runtime",
+  "repository": "GodParticles1/chat-memory",
+  "commit_sha": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "path": "history/synthetic/elf-session.md",
+  "authority": "historical_context",
+  "locator": {
+    "kind": "claim",
+    "value": "loader-mode"
+  },
+  "source_status": "unresolved"
+}

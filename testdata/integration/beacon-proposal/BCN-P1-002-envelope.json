@@ -1,0 +1,67 @@
+{
+  "producer_repository": "GodParticles1/Beacon",
+  "producer_head": "6c6179c29647909c8adf47fadb67026004af8eec",
+  "producer_workflow": "Validate Northstar Proposal Producer",
+  "producer_workflow_run_id": 32222048567,
+  "contract_version": "northstar.beacon-proposal/v1alpha1",
+  "envelope": {
+    "canonical_payload_fingerprint": "sha256:157a6d25263b868a175fcbb3662b7a3e1ff3afa18487fcb7edab80f2095df84b",
+    "compatibility": {
+      "compatibility_version": "northstar.beacon-proposal/v1alpha1",
+      "producer_schema_version": "beacon.proposal-draft/v1alpha1"
+    },
+    "contract_version": "northstar.beacon-proposal/v1alpha1",
+    "created_at": "2026-08-17T00:00:00Z",
+    "decision_ref": {
+      "object_contract_version": "beacon.decision/v1alpha1",
+      "object_id": "dec_python_contracts_001",
+      "object_type": "Decision",
+      "producer_revision": "6c6179c29647909c8adf47fadb67026004af8eec",
+      "repository": "GodParticles1/Beacon"
+    },
+    "evidence_refs": [
+      {
+        "object_contract_version": "beacon.evaluation/v1alpha1",
+        "object_id": "eval_python_contracts_001",
+        "object_type": "Evaluation",
+        "producer_revision": "6c6179c29647909c8adf47fadb67026004af8eec",
+        "repository": "GodParticles1/Beacon"
+      },
+      {
+        "object_contract_version": "beacon.technology-candidate/v1alpha1",
+        "object_id": "tech_python_contracts",
+        "object_type": "TechnologyCandidate",
+        "producer_revision": "6c6179c29647909c8adf47fadb67026004af8eec",
+        "repository": "GodParticles1/Beacon"
+      },
+      {
+        "object_contract_version": "beacon.signal/v1alpha1",
+        "object_id": "sig_fixture_python_001",
+        "object_type": "Signal",
+        "producer_revision": "6c6179c29647909c8adf47fadb67026004af8eec",
+        "repository": "GodParticles1/Beacon"
+      },
+      {
+        "object_contract_version": "beacon.source/v1alpha1",
+        "object_id": "src_fixture_python",
+        "object_type": "Source",
+        "producer_revision": "6c6179c29647909c8adf47fadb67026004af8eec",
+        "repository": "GodParticles1/Beacon"
+      }
+    ],
+    "producer_repository": "GodParticles1/Beacon",
+    "producer_revision": "6c6179c29647909c8adf47fadb67026004af8eec",
+    "proposal_id": "nsp_prop_python_contracts_001",
+    "proposal_revision": 1,
+    "proposal_type": "TECHNOLOGY_PROPOSAL",
+    "schema_version": "northstar.proposal-envelope/v1alpha1",
+    "source_proposal_ref": {
+      "object_contract_version": "beacon.proposal-draft/v1alpha1",
+      "object_id": "prop_python_contracts_001",
+      "object_type": "ProposalDraft",
+      "producer_revision": "6c6179c29647909c8adf47fadb67026004af8eec",
+      "repository": "GodParticles1/Beacon",
+      "schema_version": "northstar.proposal-ref/v1alpha1"
+    }
+  }
+}

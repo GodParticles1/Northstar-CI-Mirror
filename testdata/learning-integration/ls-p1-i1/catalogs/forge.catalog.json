@@ -1,0 +1,82 @@
+{
+  "contract_version": "2.0.0",
+  "resources": [
+    {"kind": "ResourceRef", "repository": "GodParticles1/Forge", "id": "forge.resource.python-3-12-language-reference", "revision": 1},
+    {"kind": "ResourceRef", "repository": "GodParticles1/Forge", "id": "forge.resource.json-schema-2020-12-core", "revision": 1},
+    {"kind": "ResourceRef", "repository": "GodParticles1/Forge", "id": "forge.resource.python-3-12-unittest", "revision": 1},
+    {"kind": "ResourceRef", "repository": "GodParticles1/Forge", "id": "forge.resource.pytest-8-4-assertions", "revision": 1},
+    {"kind": "ResourceRef", "repository": "GodParticles1/Forge", "id": "forge.resource.git-diff-check", "revision": 1}
+  ],
+  "evidence_targets": [
+    {"kind": "EvidenceRef", "repository": "GodParticles1/Proof", "id": "proof.evidence.forge-deterministic-python-contracts", "revision": 1},
+    {"kind": "EvidenceRef", "repository": "GodParticles1/Proof", "id": "proof.evidence.forge-boundary-failure-test-evidence", "revision": 1}
+  ],
+  "experiment_targets": [],
+  "units": [
+    {
+      "schema_version": "2.0.0",
+      "id": "forge.unit.deterministic-python-contracts",
+      "owner_repository": "GodParticles1/Forge",
+      "revision": 1,
+      "status": "FINAL_REVIEW",
+      "title": "Deterministic Python contracts",
+      "objective": "Translate a written input/output/error contract into a pure Python 3.12 implementation with canonical JSON output and deterministic failures.",
+      "prerequisites": [],
+      "resources": [
+        {"kind": "ResourceRef", "repository": "GodParticles1/Forge", "id": "forge.resource.python-3-12-language-reference", "revision": 1},
+        {"kind": "ResourceRef", "repository": "GodParticles1/Forge", "id": "forge.resource.json-schema-2020-12-core", "revision": 1}
+      ],
+      "exercise": {
+        "summary": "Implement a pure function that accepts a versioned JSON object, returns canonical JSON for valid input, and emits stable error codes for invalid input.",
+        "deliverables": ["learner-authored Python source", "contract JSON", "normal and invalid fixtures", "short explanation of deterministic choices"]
+      },
+      "project_task": {
+        "kind": "practice",
+        "summary": "Build a local contract validator with no wall-clock, network, random, database or shell dependency."
+      },
+      "acceptance": [
+        "The implementation is deterministic across two clean replays.",
+        "At least one normal, boundary and invalid fixture has an explicit expected result.",
+        "Invalid input returns a stable error code without partial output.",
+        "The learner explains which input fields form the contract boundary."
+      ],
+      "evidence_target": {"kind": "EvidenceRef", "repository": "GodParticles1/Proof", "id": "proof.evidence.forge-deterministic-python-contracts", "revision": 1},
+      "refresh": {"checked_at": "2026-08-17", "review_after": "2027-02-17", "triggers": ["Python baseline changes", "Northstar v2 contract receives a versioned correction", "A learner fixture exposes an ambiguous boundary"]},
+      "limitations": ["Content and CI readiness do not prove learner mastery.", "The task is local and does not prove service or production behavior."]
+    },
+    {
+      "schema_version": "2.0.0",
+      "id": "forge.unit.boundary-failure-test-evidence",
+      "owner_repository": "GodParticles1/Forge",
+      "revision": 1,
+      "status": "FINAL_REVIEW",
+      "title": "Boundary, failure, test and evidence engineering",
+      "objective": "Design reproducible normal, boundary and negative tests, preserve failure evidence, and distinguish a green reference run from learner mastery.",
+      "prerequisites": [
+        {"kind": "LearningUnitRef", "repository": "GodParticles1/Forge", "id": "forge.unit.deterministic-python-contracts", "revision": 1}
+      ],
+      "resources": [
+        {"kind": "ResourceRef", "repository": "GodParticles1/Forge", "id": "forge.resource.python-3-12-unittest", "revision": 1},
+        {"kind": "ResourceRef", "repository": "GodParticles1/Forge", "id": "forge.resource.pytest-8-4-assertions", "revision": 1},
+        {"kind": "ResourceRef", "repository": "GodParticles1/Forge", "id": "forge.resource.git-diff-check", "revision": 1}
+      ],
+      "exercise": {
+        "summary": "Extend the Unit 1 validator with table-driven boundary/negative tests and a compact evidence record that separates facts, failures, corrections and limitations.",
+        "deliverables": ["learner-authored tests", "one preserved failing fixture", "correction commit or patch", "replay log", "EvidenceRef-ready summary"]
+      },
+      "project_task": {
+        "kind": "practice",
+        "summary": "Run the validator twice in a clean environment, compare outputs byte-for-byte, and explain what the run proves and does not prove."
+      },
+      "acceptance": [
+        "Tests cover normal, lower/upper boundary and invalid paths.",
+        "The failing fixture is retained and passes only after a targeted correction.",
+        "Two clean replays produce byte-identical result output.",
+        "The evidence summary does not claim mastery from resources or CI."
+      ],
+      "evidence_target": {"kind": "EvidenceRef", "repository": "GodParticles1/Proof", "id": "proof.evidence.forge-boundary-failure-test-evidence", "revision": 1},
+      "refresh": {"checked_at": "2026-08-17", "review_after": "2027-02-17", "triggers": ["Selected test framework APIs change", "Evidence review finds an untested failure class", "The prerequisite unit revision changes"]},
+      "limitations": ["Reference tests and generated content do not prove independent learner authorship or mastery.", "Proof remains unchanged until the learner produces and submits real evidence."]
+    }
+  ]
+}

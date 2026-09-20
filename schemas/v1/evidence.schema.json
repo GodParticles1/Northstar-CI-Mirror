@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://personal-tech-os.local/schemas/v1/evidence.schema.json",
+  "title": "Evidence v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "task_id",
+    "stage_id",
+    "repository",
+    "commit_sha",
+    "paths",
+    "command",
+    "exit_code",
+    "environment",
+    "executed_at",
+    "raw_log_path",
+    "validator",
+    "ai_use",
+    "status",
+    "limitations"
+  ],
+  "properties": {
+    "id": {"type": "string", "minLength": 1},
+    "task_id": {"type": "string", "minLength": 1},
+    "stage_id": {"type": "string", "minLength": 1},
+    "repository": {"type": "string", "pattern": "^[^/]+/[^/]+$"},
+    "commit_sha": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "paths": {"type": "array", "items": {"type": "string", "minLength": 1}, "minItems": 1},
+    "command": {"type": "string", "minLength": 1},
+    "exit_code": {"type": "integer"},
+    "environment": {"type": "object"},
+    "executed_at": {"type": "string", "format": "date-time"},
+    "raw_log_path": {"type": "string", "minLength": 1},
+    "validator": {"type": "string", "minLength": 1},
+    "ai_use": {
+      "type": "object",
+      "required": ["policy", "used", "declaration_path"],
+      "properties": {
+        "policy": {"enum": ["A0", "A1"]},
+        "used": {"type": "boolean"},
+        "declaration_path": {"type": "string"}
+      }
+    },
+    "status": {"enum": ["PASS", "FAIL", "BLOCKED", "NOT_RUN"]},
+    "limitations": {"type": "array", "items": {"type": "string"}}
+  }
+}
+

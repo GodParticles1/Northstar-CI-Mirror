@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://personal-tech-os.local/schemas/v2/learning-refs.schema.json",
+  "title": "Learning System References v2",
+  "$ref": "#/$defs/reference",
+  "$defs": {
+    "baseReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "repository", "id", "revision"],
+      "properties": {
+        "kind": {
+          "enum": [
+            "LearningUnitRef",
+            "ResourceRef",
+            "PracticeRef",
+            "EvidenceRef",
+            "ExperimentRef"
+          ]
+        },
+        "repository": {
+          "type": "string",
+          "pattern": "^GodParticles1/[A-Za-z][A-Za-z0-9._-]*$"
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9]*(\\.[a-z0-9][a-z0-9-]*){2,}$"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "learningUnitRef": {
+      "allOf": [
+        {"$ref": "#/$defs/baseReference"},
+        {
+          "properties": {
+            "kind": {"const": "LearningUnitRef"},
+            "repository": {
+              "enum": [
+                "GodParticles1/Forge",
+                "GodParticles1/Cortex",
+                "GodParticles1/Nimbus"
+              ]
+            },
+            "id": {
+              "pattern": "^(forge|cortex|nimbus)\\.unit\\.[a-z0-9][a-z0-9-]*(\\.[a-z0-9][a-z0-9-]*)*$"
+            }
+          }
+        }
+      ]
+    },
+    "resourceRef": {
+      "allOf": [
+        {"$ref": "#/$defs/baseReference"},
+        {
+          "properties": {
+            "kind": {"const": "ResourceRef"},
+            "repository": {
+              "enum": [
+                "GodParticles1/Forge",
+                "GodParticles1/Cortex",
+                "GodParticles1/Nimbus"
+              ]
+            },
+            "id": {
+              "pattern": "^(forge|cortex|nimbus)\\.resource\\.[a-z0-9][a-z0-9-]*(\\.[a-z0-9][a-z0-9-]*)*$"
+            }
+          }
+        }
+      ]
+    },
+    "practiceRef": {
+      "allOf": [
+        {"$ref": "#/$defs/baseReference"},
+        {
+          "properties": {
+            "kind": {"const": "PracticeRef"},
+            "repository": {
+              "enum": [
+                "GodParticles1/Forge",
+                "GodParticles1/Cortex",
+                "GodParticles1/Nimbus",
+                "GodParticles1/Proof"
+              ]
+            },
+            "id": {
+              "pattern": "^(forge|cortex|nimbus|proof)\\.practice\\.[a-z0-9][a-z0-9-]*(\\.[a-z0-9][a-z0-9-]*)*$"
+            }
+          }
+        }
+      ]
+    },
+    "evidenceRef": {
+      "allOf": [
+        {"$ref": "#/$defs/baseReference"},
+        {
+          "properties": {
+            "kind": {"const": "EvidenceRef"},
+            "repository": {"const": "GodParticles1/Proof"},
+            "id": {
+              "pattern": "^proof\\.evidence\\.[a-z0-9][a-z0-9-]*(\\.[a-z0-9][a-z0-9-]*)*$"
+            }
+          }
+        }
+      ]
+    },
+    "experimentRef": {
+      "allOf": [
+        {"$ref": "#/$defs/baseReference"},
+        {
+          "properties": {
+            "kind": {"const": "ExperimentRef"},
+            "repository": {"const": "GodParticles1/Catalyst"},
+            "id": {
+              "pattern": "^catalyst\\.experiment\\.[a-z0-9][a-z0-9-]*(\\.[a-z0-9][a-z0-9-]*)*$"
+            }
+          }
+        }
+      ]
+    },
+    "reference": {
+      "oneOf": [
+        {"$ref": "#/$defs/learningUnitRef"},
+        {"$ref": "#/$defs/resourceRef"},
+        {"$ref": "#/$defs/practiceRef"},
+        {"$ref": "#/$defs/evidenceRef"},
+        {"$ref": "#/$defs/experimentRef"}
+      ]
+    }
+  }
+}

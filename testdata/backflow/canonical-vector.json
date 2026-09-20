@@ -1,0 +1,12 @@
+{
+  "input": {
+    "z": "line\n",
+    "a": [
+      "é",
+      1
+    ],
+    "payload_sha256": "ignored"
+  },
+  "canonical_utf8": "{\"a\":[\"é\",1],\"z\":\"line\\n\"}",
+  "sha256": "f6e5a74cd6e7b08958e42d26fa7d18fb9342bc1a7b38ec84802222996b025d45"
+}

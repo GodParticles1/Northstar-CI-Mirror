@@ -1,0 +1,11 @@
+{
+  "contract_id":"northstar.beacon-proposal",
+  "contract_version":"northstar.beacon-proposal/v1alpha1",
+  "schema_versions":{"proposal_ref":"northstar.proposal-ref/v1alpha1","proposal_envelope":"northstar.proposal-envelope/v1alpha1"},
+  "producer":{"repository":"GodParticles1/Beacon","owned_object":"ProposalDraft","accepted_schema_versions":["beacon.proposal-draft/v1alpha1"],"wrong_producer_error":"PRODUCER_REPOSITORY_FORBIDDEN"},
+  "authority":{"beacon_owned_objects":["Source","Signal","TechnologyCandidate","Evaluation","Decision","ProposalDraft"],"northstar_owned_objects":["ProposalRef","ProposalEnvelope"],"beacon_domain_payload_copied":false,"wrong_owner_error":"CROSS_REPOSITORY_AUTHORITY_VIOLATION"},
+  "identity":{"fields":["proposal_id","proposal_revision","producer_repository"],"canonical_payload":"canonical JSON of ProposalEnvelope excluding canonical_payload_fingerprint","fingerprint_algorithm":"sha256","same_identity_same_payload":"REPLAY_PRIOR_PROPOSAL","same_identity_changed_payload":"PROPOSAL_IDENTITY_CONFLICT"},
+  "compatibility":{"supported_contract_versions":["northstar.beacon-proposal/v1alpha1"],"supported_envelope_schema_versions":["northstar.proposal-envelope/v1alpha1"],"supported_ref_schema_versions":["northstar.proposal-ref/v1alpha1"],"supported_producer_schema_versions":["beacon.proposal-draft/v1alpha1"],"revision_rule":"producer_revision and every Beacon-owned ref must name the same 40-hex Git revision","unsupported_contract_error":"CONTRACT_VERSION_UNSUPPORTED","unsupported_schema_error":"SCHEMA_VERSION_UNSUPPORTED","unsupported_producer_schema_error":"PRODUCER_SCHEMA_UNSUPPORTED","incompatible_revision_error":"PRODUCER_REVISION_INCOMPATIBLE","silent_acceptance":false},
+  "acceptance_boundary":{"emitted_is_accepted":false,"schema_valid_is_governance_accepted":false,"governance_acceptance_mutates_member_repositories":false,"validation_result":"VALID_FOR_GOVERNANCE_REVIEW","acceptance_requires_separate_governance_decision":true},
+  "coupling":{"hidden_shared_state":false,"cross_repo_database":false,"raw_filesystem_dependency":false,"beacon_domain_object_copy":false}
+}

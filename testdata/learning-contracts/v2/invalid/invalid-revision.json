@@ -1,0 +1,61 @@
+{
+  "contract_version": "2.0.0",
+  "resources": [
+    {
+      "kind": "ResourceRef",
+      "repository": "GodParticles1/Forge",
+      "id": "forge.resource.invalid-revision-docs",
+      "revision": 0
+    }
+  ],
+  "evidence_targets": [
+    {
+      "kind": "EvidenceRef",
+      "repository": "GodParticles1/Proof",
+      "id": "proof.evidence.invalid-revision",
+      "revision": 1
+    }
+  ],
+  "experiment_targets": [],
+  "units": [
+    {
+      "schema_version": "2.0.0",
+      "id": "forge.unit.invalid-revision",
+      "owner_repository": "GodParticles1/Forge",
+      "revision": 1,
+      "status": "DRAFT",
+      "title": "Invalid revision fixture",
+      "objective": "Reject a reference revision below the supported minimum.",
+      "prerequisites": [],
+      "resources": [
+        {
+          "kind": "ResourceRef",
+          "repository": "GodParticles1/Forge",
+          "id": "forge.resource.invalid-revision-docs",
+          "revision": 0
+        }
+      ],
+      "exercise": {
+        "summary": "Negative contract fixture only.",
+        "deliverables": ["validation result"]
+      },
+      "project_task": {
+        "kind": "practice",
+        "summary": "Verify invalid revision is rejected deterministically."
+      },
+      "acceptance": ["revision zero is rejected"],
+      "evidence_target": {
+        "kind": "EvidenceRef",
+        "repository": "GodParticles1/Proof",
+        "id": "proof.evidence.invalid-revision",
+        "revision": 1
+      },
+      "refresh": {
+        "checked_at": "2026-08-17",
+        "review_after": "2027-02-17",
+        "triggers": ["contract revision semantics change"]
+      },
+      "limitations": ["Invalid fixture only."]
+    }
+  ]
+}

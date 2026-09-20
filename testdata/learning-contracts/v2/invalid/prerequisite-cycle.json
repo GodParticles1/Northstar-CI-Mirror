@@ -1,0 +1,47 @@
+{
+  "contract_version": "2.0.0",
+  "resources": [
+    {"kind": "ResourceRef", "repository": "GodParticles1/Forge", "id": "forge.resource.cycle-docs", "revision": 1}
+  ],
+  "evidence_targets": [
+    {"kind": "EvidenceRef", "repository": "GodParticles1/Proof", "id": "proof.evidence.cycle-a", "revision": 1},
+    {"kind": "EvidenceRef", "repository": "GodParticles1/Proof", "id": "proof.evidence.cycle-b", "revision": 1}
+  ],
+  "experiment_targets": [],
+  "units": [
+    {
+      "schema_version": "2.0.0",
+      "id": "forge.unit.cycle-a",
+      "owner_repository": "GodParticles1/Forge",
+      "revision": 1,
+      "status": "DRAFT",
+      "title": "Cycle A",
+      "objective": "Demonstrate cycle detection.",
+      "prerequisites": [{"kind": "LearningUnitRef", "repository": "GodParticles1/Forge", "id": "forge.unit.cycle-b", "revision": 1}],
+      "resources": [{"kind": "ResourceRef", "repository": "GodParticles1/Forge", "id": "forge.resource.cycle-docs", "revision": 1}],
+      "exercise": {"summary": "Create node A.", "deliverables": ["fixture"]},
+      "project_task": {"kind": "practice", "summary": "Validate the graph."},
+      "acceptance": ["cycle is rejected"],
+      "evidence_target": {"kind": "EvidenceRef", "repository": "GodParticles1/Proof", "id": "proof.evidence.cycle-a", "revision": 1},
+      "refresh": {"checked_at": "2026-08-17", "review_after": "2027-02-17", "triggers": ["contract changes"]},
+      "limitations": ["Invalid fixture only."]
+    },
+    {
+      "schema_version": "2.0.0",
+      "id": "forge.unit.cycle-b",
+      "owner_repository": "GodParticles1/Forge",
+      "revision": 1,
+      "status": "DRAFT",
+      "title": "Cycle B",
+      "objective": "Demonstrate cycle detection.",
+      "prerequisites": [{"kind": "LearningUnitRef", "repository": "GodParticles1/Forge", "id": "forge.unit.cycle-a", "revision": 1}],
+      "resources": [{"kind": "ResourceRef", "repository": "GodParticles1/Forge", "id": "forge.resource.cycle-docs", "revision": 1}],
+      "exercise": {"summary": "Create node B.", "deliverables": ["fixture"]},
+      "project_task": {"kind": "practice", "summary": "Validate the graph."},
+      "acceptance": ["cycle is rejected"],
+      "evidence_target": {"kind": "EvidenceRef", "repository": "GodParticles1/Proof", "id": "proof.evidence.cycle-b", "revision": 1},
+      "refresh": {"checked_at": "2026-08-17", "review_after": "2027-02-17", "triggers": ["contract changes"]},
+      "limitations": ["Invalid fixture only."]
+    }
+  ]
+}

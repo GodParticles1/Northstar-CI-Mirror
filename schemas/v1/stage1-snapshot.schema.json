@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://personal-tech-os.local/schemas/v1/stage1-snapshot.schema.json",
+  "title": "Personal Tech OS Stage 1 Snapshot",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "sections"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "sections": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidence", "gates", "plan_units", "plan_windows", "resources", "skill_edges", "skills", "stages", "tasks", "unit_support"],
+      "properties": {
+        "evidence": {"type": "array", "items": {"$ref": "evidence.schema.json"}},
+        "gates": {"type": "array", "items": {"type": "object"}},
+        "plan_units": {"type": "array", "minItems": 28, "maxItems": 28, "items": {"$ref": "plan-unit.schema.json"}},
+        "plan_windows": {"type": "array", "items": {"type": "object"}},
+        "resources": {"type": "array", "items": {"$ref": "resource.schema.json"}},
+        "skill_edges": {"type": "array", "items": {"type": "object"}},
+        "skills": {"type": "array", "items": {"type": "object"}},
+        "stages": {"type": "array", "items": {"type": "object"}},
+        "tasks": {"type": "array", "items": {"type": "object"}},
+        "unit_support": {"type": "array", "minItems": 28, "maxItems": 28, "items": {"type": "object"}}
+      }
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://personal-tech-os.local/schemas/v1/plan-unit.schema.json",
+  "title": "PlanUnitTemplate v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "sequence",
+    "title",
+    "content",
+    "why",
+    "prerequisites",
+    "official_resources",
+    "resource_scope",
+    "independent_work",
+    "tests",
+    "git_evidence",
+    "readme_evidence",
+    "acceptance",
+    "remediation",
+    "ai_policy",
+    "skill_ids"
+  ],
+  "properties": {
+    "id": {"type": "string", "pattern": "^D(0[1-9]|1[0-9]|2[0-8])$"},
+    "sequence": {"type": "integer", "minimum": 1, "maximum": 28},
+    "title": {"type": "string", "minLength": 1},
+    "content": {"type": "string", "minLength": 1},
+    "why": {"type": "string", "minLength": 1},
+    "prerequisites": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "official_resources": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "resource_scope": {"type": "string", "minLength": 1},
+    "independent_work": {"type": "array", "items": {"type": "string", "minLength": 1}, "minItems": 1},
+    "tests": {"type": "array", "items": {"type": "string", "minLength": 1}, "minItems": 1},
+    "git_evidence": {"type": "array", "items": {"type": "string", "minLength": 1}, "minItems": 1},
+    "readme_evidence": {"type": "array", "items": {"type": "string", "minLength": 1}, "minItems": 1},
+    "acceptance": {"type": "array", "items": {"type": "string", "minLength": 1}, "minItems": 1},
+    "remediation": {"type": "string", "minLength": 1},
+    "ai_policy": {"enum": ["A0", "A1"]},
+    "skill_ids": {"type": "array", "items": {"type": "string"}, "minItems": 1, "uniqueItems": true}
+  }
+}
+

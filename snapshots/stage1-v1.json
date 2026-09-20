@@ -1,0 +1,3114 @@
+{
+  "schema_version": "1.0.0",
+  "sections": {
+    "evidence": [],
+    "gates": [
+      {
+        "after_unit": "D28",
+        "failure_action": "block_release_and_remediate",
+        "id": "GATE-S0-M1",
+        "name": "月度发布门禁",
+        "requires_independent_reviewer": true,
+        "stage_id": "S0",
+        "state": "locked"
+      },
+      {
+        "after_unit": "D07",
+        "failure_action": "remediation_2_to_3_units",
+        "id": "GATE-S0-W1",
+        "name": "周门禁 1",
+        "requires_independent_reviewer": false,
+        "stage_id": "S0",
+        "state": "locked"
+      },
+      {
+        "after_unit": "D14",
+        "failure_action": "remediation_2_to_5_units",
+        "id": "GATE-S0-W2",
+        "name": "周门禁 2",
+        "requires_independent_reviewer": false,
+        "stage_id": "S0",
+        "state": "locked"
+      },
+      {
+        "after_unit": "D21",
+        "failure_action": "remediation_2_to_7_units",
+        "id": "GATE-S0-W3",
+        "name": "周门禁 3",
+        "requires_independent_reviewer": true,
+        "stage_id": "S0",
+        "state": "locked"
+      }
+    ],
+    "plan_units": [
+      {
+        "acceptance": [
+          "核心函数可逐行解释",
+          "输入边界有实际运行记录",
+          "Part A 在资料读取前冻结"
+        ],
+        "ai_policy": "A0",
+        "content": "Part A 在读资料前完成无 AI 基线；冻结 commit 后才进入 Part B 补课变体。",
+        "git_evidence": [
+          "Part A 单独 commit 和 SHA256",
+          "Part B 不覆盖基线"
+        ],
+        "id": "D01",
+        "independent_work": [
+          "diagnostics/day01_baseline.py",
+          "三个纯函数",
+          "一个小型文本解析",
+          "data/examples/day01-*",
+          "Part B 独立变体"
+        ],
+        "official_resources": [
+          "resource.cs50p"
+        ],
+        "prerequisites": [],
+        "readme_evidence": [
+          "只记录真实起点和证据 commit",
+          "不写掌握"
+        ],
+        "remediation": "任一核心函数无法解释时按 Week 0 补课，并另开变体复测；基线文件禁止回写。",
+        "resource_scope": "Part A 完成前不读资料；之后只读 CS50P syllabus 与 Week 0 从 Creating Code with Python 到 Variables。",
+        "sequence": 1,
+        "skill_ids": [
+          "skill.python.baseline"
+        ],
+        "tests": [
+          "90 分钟闭卷",
+          "至少五组正常、空和非法输入",
+          "逐行解释",
+          "记录耗时"
+        ],
+        "title": "冻结真实 Python 起点",
+        "why": "避免把短期学习结果误写成已有能力。"
+      },
+      {
+        "acceptance": [
+          "引用正确",
+          "错误路径非零退出",
+          "不修改系统配置"
+        ],
+        "ai_policy": "A1",
+        "content": "路径、引用、权限、重定向、退出码、signals/jobs；只观察自己启动的作业。",
+        "git_evidence": [
+          "脚本",
+          "命令和实际输出",
+          "真实退出码"
+        ],
+        "id": "D02",
+        "independent_work": [
+          "scripts/env_path_check.sh",
+          "只读检查路径和文件",
+          "只向自己启动的 sleep 发送 TERM"
+        ],
+        "official_resources": [
+          "resource.missing-semester",
+          "resource.bash-manual",
+          "resource.shellcheck"
+        ],
+        "prerequisites": [
+          "D01"
+        ],
+        "readme_evidence": [
+          "运行前提",
+          "只读安全边界"
+        ],
+        "remediation": "引用或退出码失败时分别完成三个最小实验后复测。",
+        "resource_scope": "Missing Semester 的 navigation、quoting、streams、return codes、signals/jobs；Bash 3.5/3.6/3.7.5。",
+        "sequence": 2,
+        "skill_ids": [
+          "skill.shell.safety"
+        ],
+        "tests": [
+          "空格路径",
+          "缺失文件",
+          "不可读文件",
+          "成功和失败退出码",
+          "bash -n",
+          "ShellCheck 可用时运行"
+        ],
+        "title": "Shell 路径、引用与退出码",
+        "why": "后续自动化和证据采集需要安全、可解释的 Shell 边界。"
+      },
+      {
+        "acceptance": [
+          "能独立完成冲突解决和恢复",
+          "历史可复核"
+        ],
+        "ai_policy": "A1",
+        "content": "working tree、stage、commit、branch、diff、log、冲突与误改恢复。",
+        "git_evidence": [
+          "docs/git-lab.md",
+          "冲突和恢复 commit 图"
+        ],
+        "id": "D03",
+        "independent_work": [
+          "建立分支",
+          "制造同一行冲突",
+          "独立解决",
+          "恢复一次误改"
+        ],
+        "official_resources": [
+          "resource.missing-semester",
+          "resource.pro-git"
+        ],
+        "prerequisites": [
+          "D02"
+        ],
+        "readme_evidence": [
+          "提交约定"
+        ],
+        "remediation": "无法恢复时在新的本地实验仓完整重做，不跳过冲突。",
+        "resource_scope": "Missing Semester Version Control；Pro Git 2.1-2.4、3.1-3.2。",
+        "sequence": 3,
+        "skill_ids": [
+          "skill.git.evidence"
+        ],
+        "tests": [
+          "git status 干净",
+          "解释工作区、暂存区和 commit",
+          "保留冲突前后 log"
+        ],
+        "title": "Git 证据工作流",
+        "why": "以后所有能力证据都依赖可追溯 Git 历史。"
+      },
+      {
+        "acceptance": [
+          "首版测试可抓住错误实现",
+          "每个函数输入输出可解释"
+        ],
+        "ai_policy": "A1",
+        "content": "变量、函数、参数、返回值和最小 pytest。",
+        "git_evidence": [
+          "源码",
+          "tests/test_stats.py",
+          "真实测试退出码"
+        ],
+        "id": "D04",
+        "independent_work": [
+          "src/resource_linter/stats.py 的三个纯函数",
+          "最小 pyproject.toml",
+          "首版测试"
+        ],
+        "official_resources": [
+          "resource.cs50p",
+          "resource.pytest"
+        ],
+        "prerequisites": [
+          "D01",
+          "D03"
+        ],
+        "readme_evidence": [
+          "函数契约",
+          "测试命令"
+        ],
+        "remediation": "测试未捕获种子错误时先补测试基础，再以不同错误复测。",
+        "resource_scope": "CS50P Week 0 Functions/Variables；pytest Getting Started 到第一个 test。",
+        "sequence": 4,
+        "skill_ids": [
+          "skill.python.functions",
+          "skill.testing"
+        ],
+        "tests": [
+          "正常",
+          "空输入",
+          "类型错误",
+          "证明一个种子错误会被测试捕获"
+        ],
+        "title": "函数契约与最小测试",
+        "why": "从第一段正式代码开始建立可测性。"
+      },
+      {
+        "acceptance": [
+          "Unicode 输入不损坏",
+          "转换失败有明确结果"
+        ],
+        "ai_policy": "A1",
+        "content": "字符串、数字、Unicode、类型转换和文本规范化。",
+        "git_evidence": [
+          "源码",
+          "test_normalize.py",
+          "样例文件"
+        ],
+        "id": "D05",
+        "independent_work": [
+          "normalize.py",
+          "规范空白",
+          "计数",
+          "受控数字转换"
+        ],
+        "official_resources": [
+          "resource.python-tutorial"
+        ],
+        "prerequisites": [
+          "D04"
+        ],
+        "readme_evidence": [
+          "编码假设和限制"
+        ],
+        "remediation": "Unicode 或异常边界失败时补最小字符串实验后重写变体。",
+        "resource_scope": "Python Tutorial 3.1 中 Numbers、Text、Lists 的相关部分。",
+        "sequence": 5,
+        "skill_ids": [
+          "skill.text.unicode"
+        ],
+        "tests": [
+          "空字符串",
+          "中文和 emoji",
+          "非法数字",
+          "超长行"
+        ],
+        "title": "字符串、Unicode 与受控转换",
+        "why": "资源数据首先是文本，编码与非法输入必须显式处理。"
+      },
+      {
+        "acceptance": [
+          "可解释每层契约",
+          "修改一层不要求重写全部测试"
+        ],
+        "ai_policy": "A1",
+        "content": "函数分解、返回值和基本 type hint。",
+        "git_evidence": [
+          "parser.py",
+          "测试",
+          "数据流说明"
+        ],
+        "id": "D06",
+        "independent_work": [
+          "把解析流程拆成四到六个可测函数",
+          "每个函数只承担一个职责"
+        ],
+        "official_resources": [
+          "resource.cs50p",
+          "resource.python-tutorial"
+        ],
+        "prerequisites": [
+          "D05"
+        ],
+        "readme_evidence": [
+          "各层输入和输出"
+        ],
+        "remediation": "无法解释输入输出时重新画数据流并缩小函数职责。",
+        "resource_scope": "CS50P Week 0 Comments、Pseudocode、Returning Values；Python Tutorial 4.7/4.8 的函数部分。",
+        "sequence": 6,
+        "skill_ids": [
+          "skill.code.decomposition"
+        ],
+        "tests": [
+          "所有公共函数覆盖正常和非法输入",
+          "类型工具只作提示"
+        ],
+        "title": "函数分解与类型提示",
+        "why": "防止单文件堆逻辑，为后续规则、I/O 和测试分层。"
+      },
+      {
+        "acceptance": [
+          "独立完成",
+          "隐藏样例通过",
+          "可逐行解释"
+        ],
+        "ai_policy": "A0",
+        "content": "验证函数、类型、文件和测试的独立能力，不新增资料。",
+        "git_evidence": [
+          "diagnostics/gate01/",
+          "docs/retrospectives/week01.md"
+        ],
+        "id": "D07",
+        "independent_work": [
+          "90 分钟从空文件实现不同题目的文本统计变体"
+        ],
+        "official_resources": [],
+        "prerequisites": [
+          "D01",
+          "D02",
+          "D03",
+          "D04",
+          "D05",
+          "D06"
+        ],
+        "readme_evidence": [
+          "接口未变化时不改 README，门禁证据写入复盘"
+        ],
+        "remediation": "失败则暂停 D08，补两个到三个针对性单元，再以不同题复测。",
+        "resource_scope": "闭卷，不新增资料。",
+        "sequence": 7,
+        "skill_ids": [
+          "skill.python.functions",
+          "skill.testing",
+          "skill.text.unicode",
+          "skill.code.decomposition"
+        ],
+        "tests": [
+          "隐藏样例",
+          "正常、空和非法输入",
+          "逐行口述"
+        ],
+        "title": "周门禁 1",
+        "why": "阻止在基础不稳时继续堆新内容。"
+      },
+      {
+        "acceptance": [
+          "所有边界有证据",
+          "规则结果可解释"
+        ],
+        "ai_policy": "A1",
+        "content": "条件、真值表、边界前后和组合规则。",
+        "git_evidence": [
+          "rules.py",
+          "test_rules.py"
+        ],
+        "id": "D08",
+        "independent_work": [
+          "rules.py",
+          "长度规则",
+          "必填规则",
+          "枚举规则"
+        ],
+        "official_resources": [
+          "resource.cs50p"
+        ],
+        "prerequisites": [
+          "D07"
+        ],
+        "readme_evidence": [
+          "规则优先级"
+        ],
+        "remediation": "边界漏测时先补真值表，再以不同规则重做。",
+        "resource_scope": "CS50P Week 1 Conditionals。",
+        "sequence": 8,
+        "skill_ids": [
+          "skill.rules.boundaries"
+        ],
+        "tests": [
+          "真值表",
+          "边界前后各一例",
+          "组合规则"
+        ],
+        "title": "条件、布尔逻辑与边界",
+        "why": "进入资源校验器的确定性规则核心。"
+      },
+      {
+        "acceptance": [
+          "循环状态可纸笔追踪",
+          "错误位置不丢失"
+        ],
+        "ai_policy": "A1",
+        "content": "循环、迭代和 enumerate，处理多条资源记录。",
+        "git_evidence": [
+          "源码",
+          "测试",
+          "输入样例"
+        ],
+        "id": "D09",
+        "independent_work": [
+          "filters.py",
+          "聚合",
+          "过滤",
+          "保留错误位置"
+        ],
+        "official_resources": [
+          "resource.cs50p"
+        ],
+        "prerequisites": [
+          "D08"
+        ],
+        "readme_evidence": [
+          "输入规模假设"
+        ],
+        "remediation": "循环状态无法口述时用纸笔逐步追踪并重写。",
+        "resource_scope": "CS50P Week 2 Loops。",
+        "sequence": 9,
+        "skill_ids": [
+          "skill.collections"
+        ],
+        "tests": [
+          "空集合",
+          "单条",
+          "大输入",
+          "含非法记录"
+        ],
+        "title": "循环与迭代",
+        "why": "让批量处理保留错误位置和可解释状态。"
+      },
+      {
+        "acceptance": [
+          "调用方输入保持不变",
+          "顺序策略明确"
+        ],
+        "ai_policy": "A1",
+        "content": "list、tuple、slice 和不意外修改调用方输入。",
+        "git_evidence": [
+          "源码",
+          "测试",
+          "小型复杂度记录"
+        ],
+        "id": "D10",
+        "independent_work": [
+          "sequence_ops.py",
+          "批量规范化",
+          "切片",
+          "tuple 返回"
+        ],
+        "official_resources": [
+          "resource.python-tutorial"
+        ],
+        "prerequisites": [
+          "D09"
+        ],
+        "readme_evidence": [
+          "为何选择 list 或 tuple"
+        ],
+        "remediation": "输入被修改或行为不稳时缩回最小实现重做。",
+        "resource_scope": "Python Tutorial 3.1.3、5.1、5.3。",
+        "sequence": 10,
+        "skill_ids": [
+          "skill.collections"
+        ],
+        "tests": [
+          "空列表",
+          "顺序",
+          "重复项",
+          "输入不可变性"
+        ],
+        "title": "序列与输入不可变性",
+        "why": "批处理接口需要稳定的顺序和副作用边界。"
+      },
+      {
+        "acceptance": [
+          "结构选型可解释",
+          "去重不吞掉非重复记录"
+        ],
+        "ai_policy": "A1",
+        "content": "dict、set、精确 URL 去重、ID 索引和状态统计。",
+        "git_evidence": [
+          "源码",
+          "测试"
+        ],
+        "id": "D11",
+        "independent_work": [
+          "resource_index.py",
+          "精确 URL 去重",
+          "ID 索引",
+          "状态计数"
+        ],
+        "official_resources": [
+          "resource.python-tutorial"
+        ],
+        "prerequisites": [
+          "D10"
+        ],
+        "readme_evidence": [
+          "list、set、dict 比较",
+          "重复的定义"
+        ],
+        "remediation": "选型说不清时完成三种结构对照实验。",
+        "resource_scope": "Python Tutorial 5.4-5.6。",
+        "sequence": 11,
+        "skill_ids": [
+          "skill.collections"
+        ],
+        "tests": [
+          "重复键",
+          "缺失键",
+          "空集合",
+          "顺序假设"
+        ],
+        "title": "字典、集合与去重定义",
+        "why": "资源索引需要明确数据结构与重复语义。"
+      },
+      {
+        "acceptance": [
+          "多错误不被第一个错误遮蔽",
+          "定位字段明确"
+        ],
+        "ai_policy": "A1",
+        "content": "嵌套集合和简单记录建模，为 JSON/schema 建立桥梁。",
+        "git_evidence": [
+          "resources JSON 草稿",
+          "测试",
+          "错误输出样例"
+        ],
+        "id": "D12",
+        "independent_work": [
+          "records.py",
+          "读取字典记录",
+          "返回逐字段错误"
+        ],
+        "official_resources": [
+          "resource.python-tutorial"
+        ],
+        "prerequisites": [
+          "D11"
+        ],
+        "readme_evidence": [
+          "字段表"
+        ],
+        "remediation": "只返回布尔值或错误证据不足时重新设计结果结构。",
+        "resource_scope": "Python Tutorial 5.6 的循环技巧和嵌套结构。",
+        "sequence": 12,
+        "skill_ids": [
+          "skill.collections"
+        ],
+        "tests": [
+          "缺字段",
+          "额外字段",
+          "错误类型",
+          "多错误同时存在"
+        ],
+        "title": "嵌套记录与逐字段错误",
+        "why": "校验结果必须给出字段级证据，而不是只有 True/False。"
+      },
+      {
+        "acceptance": [
+          "解释 O(n) 与 O(log n)",
+          "不对无序输入误用二分"
+        ],
+        "ai_policy": "A1",
+        "content": "线性查找、二分查找、排序前置和比较次数。",
+        "git_evidence": [
+          "源码",
+          "测试",
+          "benchmarks/day13.md"
+        ],
+        "id": "D13",
+        "independent_work": [
+          "search.py",
+          "线性查找",
+          "二分查找",
+          "显式统计比较次数"
+        ],
+        "official_resources": [
+          "resource.cs50x-search"
+        ],
+        "prerequisites": [
+          "D09",
+          "D10",
+          "D11",
+          "D12"
+        ],
+        "readme_evidence": [
+          "有序输入前置",
+          "重复值策略"
+        ],
+        "remediation": "无法解释前置或边界时补纸笔追踪并换数据复测。",
+        "resource_scope": "只读 Running Time、Linear Search、Binary Search；跳过排序、递归和课程作业。",
+        "sequence": 13,
+        "skill_ids": [
+          "skill.search.complexity"
+        ],
+        "tests": [
+          "空",
+          "单个",
+          "命中",
+          "未命中",
+          "重复值",
+          "timeit 仅作观察"
+        ],
+        "title": "线性查找、二分与 Big-O 直觉",
+        "why": "只学习当前项目真正需要的算法边界。"
+      },
+      {
+        "acceptance": [
+          "独立通过不同题目",
+          "数据结构和复杂度可解释"
+        ],
+        "ai_policy": "A0",
+        "content": "验证条件、循环、集合、重复检测和查找。",
+        "git_evidence": [
+          "diagnostics/gate02/",
+          "周复盘",
+          "真实测试输出"
+        ],
+        "id": "D14",
+        "independent_work": [
+          "120 分钟从空白实现新的搜索加重复检测题"
+        ],
+        "official_resources": [],
+        "prerequisites": [
+          "D08",
+          "D09",
+          "D10",
+          "D11",
+          "D12",
+          "D13"
+        ],
+        "readme_evidence": [
+          "接口未变化时不改 README"
+        ],
+        "remediation": "失败即停止新章节，按弱项补两个到五个单元并换题。",
+        "resource_scope": "闭卷，不新增资料。",
+        "sequence": 14,
+        "skill_ids": [
+          "skill.rules.boundaries",
+          "skill.collections",
+          "skill.search.complexity"
+        ],
+        "tests": [
+          "隐藏边界",
+          "输入不可变性",
+          "二分前置",
+          "解释 O(n) 和 O(log n)"
+        ],
+        "title": "周门禁 2",
+        "why": "在异常、文件和工程化前确认规则与数据结构基础。"
+      },
+      {
+        "acceptance": [
+          "错误不被吞掉",
+          "用户错误与 bug 可区分"
+        ],
+        "ai_policy": "A1",
+        "content": "区分用户错误、环境错误和程序 bug，禁止宽泛捕获。",
+        "git_evidence": [
+          "错误策略文档",
+          "回归测试"
+        ],
+        "id": "D15",
+        "independent_work": [
+          "errors.py",
+          "为现有模块定义明确异常契约"
+        ],
+        "official_resources": [
+          "resource.cs50p",
+          "resource.python-tutorial"
+        ],
+        "prerequisites": [
+          "D14"
+        ],
+        "readme_evidence": [
+          "错误类别",
+          "退出码边界"
+        ],
+        "remediation": "错误被吞或退出码错误时用不同失败样例重做。",
+        "resource_scope": "CS50P Week 3；Python Tutorial 8.1-8.7 相关范围。",
+        "sequence": 15,
+        "skill_ids": [
+          "skill.exceptions"
+        ],
+        "tests": [
+          "非法格式",
+          "缺文件",
+          "自定义错误",
+          "禁止裸 except"
+        ],
+        "title": "异常与错误边界",
+        "why": "错误必须可复现、可分类并映射退出码。"
+      },
+      {
+        "acceptance": [
+          "干净环境和 CI 都通过",
+          "结果引用真实 run"
+        ],
+        "ai_policy": "A1",
+        "content": "module/import、venv、依赖、pyproject 和最小 CI 骨架。",
+        "git_evidence": [
+          "pyproject.toml",
+          "CI 文件",
+          "运行日志"
+        ],
+        "id": "D16",
+        "independent_work": [
+          "整理为包",
+          "声明最小依赖",
+          "独立写最小 CI"
+        ],
+        "official_resources": [
+          "resource.cs50p",
+          "resource.python-library",
+          "resource.pypa-packaging",
+          "resource.github-actions-python"
+        ],
+        "prerequisites": [
+          "D15"
+        ],
+        "readme_evidence": [
+          "quickstart",
+          "CI 范围和 Python 版本"
+        ],
+        "remediation": "任一环境失败均不得宣称可复现，先缩小依赖再复测。",
+        "resource_scope": "CS50P Libraries；venv 创建激活；PyPA 最小项目；Actions checkout/setup/install/test。",
+        "sequence": 16,
+        "skill_ids": [
+          "skill.packaging.ci"
+        ],
+        "tests": [
+          "删除旧环境",
+          "干净 venv 安装",
+          "运行测试",
+          "一次真实 CI"
+        ],
+        "title": "模块、环境、包与最小 CI",
+        "why": "尽早证明干净环境可复现，避免把全部工程化拖到最后。"
+      },
+      {
+        "acceptance": [
+          "不写死路径",
+          "不覆盖输入",
+          "错误有证据"
+        ],
+        "ai_policy": "A1",
+        "content": "跨平台路径、文本读取和受控输出。",
+        "git_evidence": [
+          "源码",
+          "测试",
+          "fixtures"
+        ],
+        "id": "D17",
+        "independent_work": [
+          "file_io.py",
+          "扫描",
+          "读取",
+          "受控输出"
+        ],
+        "official_resources": [
+          "resource.python-tutorial",
+          "resource.python-library"
+        ],
+        "prerequisites": [
+          "D16"
+        ],
+        "readme_evidence": [
+          "路径和覆盖边界"
+        ],
+        "remediation": "写死路径或覆盖输入时回退到只读最小实现重做。",
+        "resource_scope": "Python Tutorial 7.2；pathlib basic use。",
+        "sequence": 17,
+        "skill_ids": [
+          "skill.file.io"
+        ],
+        "tests": [
+          "不存在",
+          "目录冒充文件",
+          "空文件",
+          "无权限模拟"
+        ],
+        "title": "pathlib 与安全文件 I/O",
+        "why": "资源校验器需要明确输入、输出和覆盖边界。"
+      },
+      {
+        "acceptance": [
+          "正常、边界、非法均覆盖",
+          "round-trip 语义稳定"
+        ],
+        "ai_policy": "A1",
+        "content": "JSON/CSV 解析、序列化、错误定位和 round-trip。",
+        "git_evidence": [
+          "样例",
+          "测试",
+          "输出记录"
+        ],
+        "id": "D18",
+        "independent_work": [
+          "serializers.py",
+          "JSON/CSV 转统一记录",
+          "逐条错误定位"
+        ],
+        "official_resources": [
+          "resource.cs50p",
+          "resource.python-library"
+        ],
+        "prerequisites": [
+          "D17"
+        ],
+        "readme_evidence": [
+          "schema 和版本"
+        ],
+        "remediation": "只测 happy path 时补错误样例后复测。",
+        "resource_scope": "CS50P Week 6；json 与 csv 标准库基础。",
+        "sequence": 18,
+        "skill_ids": [
+          "skill.serialization"
+        ],
+        "tests": [
+          "损坏 JSON",
+          "缺列",
+          "额外列",
+          "Unicode",
+          "round-trip"
+        ],
+        "title": "JSON、CSV 与统一记录",
+        "why": "建立资源数据交换格式和版本边界。"
+      },
+      {
+        "acceptance": [
+          "fixture 不隐藏业务逻辑",
+          "用例可以逐条解释"
+        ],
+        "ai_policy": "A1",
+        "content": "系统化等价类并减少重复测试代码。",
+        "git_evidence": [
+          "tests/conftest.py",
+          "测试说明",
+          "红绿记录"
+        ],
+        "id": "D19",
+        "independent_work": [
+          "重构现有测试",
+          "新增 fixture factory"
+        ],
+        "official_resources": [
+          "resource.cs50p",
+          "resource.pytest"
+        ],
+        "prerequisites": [
+          "D18"
+        ],
+        "readme_evidence": [
+          "测试分层"
+        ],
+        "remediation": "fixture 隐藏逻辑时回退简单测试，再逐步抽取。",
+        "resource_scope": "CS50P Week 5；pytest assertions、fixtures、parametrize。",
+        "sequence": 19,
+        "skill_ids": [
+          "skill.testing"
+        ],
+        "tests": [
+          "参数化覆盖等价类",
+          "证明至少两个种子 bug 会失败"
+        ],
+        "title": "pytest 断言、fixture 与参数化",
+        "why": "让测试规模增长时仍可解释、可维护。"
+      },
+      {
+        "acceptance": [
+          "每个修复有先红后绿证据",
+          "性能结论不超出数据"
+        ],
+        "ai_policy": "A1",
+        "content": "先加失败测试再修给定 bug，并建立可复核测量方法。",
+        "git_evidence": [
+          "bug 复盘",
+          "回归测试",
+          "benchmark 脚本和原始结果"
+        ],
+        "id": "D20",
+        "independent_work": [
+          "先红后绿修复种子 bug",
+          "benchmarks/bench_resource_linter.py"
+        ],
+        "official_resources": [
+          "resource.missing-semester"
+        ],
+        "prerequisites": [
+          "D19"
+        ],
+        "readme_evidence": [
+          "如何复现 benchmark"
+        ],
+        "remediation": "先改代码后补测试则该次证据作废，恢复种子 bug 后重来。",
+        "resource_scope": "Debugging and Profiling 的 Debugging code、Logging、Debuggers、Profiling。",
+        "sequence": 20,
+        "skill_ids": [
+          "skill.debugging.profiling"
+        ],
+        "tests": [
+          "症状复现",
+          "根因实验",
+          "回归测试",
+          "记录环境、输入、预热、重复次数和统计方法"
+        ],
+        "title": "调试、回归与基础 benchmark",
+        "why": "训练从证据找根因，而不是凭感觉改代码。"
+      },
+      {
+        "acceptance": [
+          "独立评审复跑",
+          "职责分离",
+          "真实命令和退出码"
+        ],
+        "ai_policy": "A0",
+        "content": "由独立评审者提供未知 bug 分支和隐藏测试。",
+        "git_evidence": [
+          "diagnostics/gate03/",
+          "题目、测试、实现、运行、评审五方身份与 commit"
+        ],
+        "id": "D21",
+        "independent_work": [
+          "限时复现",
+          "先写失败回归测试",
+          "修复未知 bug"
+        ],
+        "official_resources": [],
+        "prerequisites": [
+          "D15",
+          "D16",
+          "D17",
+          "D18",
+          "D19",
+          "D20"
+        ],
+        "readme_evidence": [
+          "接口无变化时不改 README"
+        ],
+        "remediation": "失败后补异常、测试和调试两个到七个单元，再由独立评审换题。",
+        "resource_scope": "闭卷，不新增资料；无独立 bug pack 时状态为 BLOCKED。",
+        "sequence": 21,
+        "skill_ids": [
+          "skill.exceptions",
+          "skill.testing",
+          "skill.debugging.profiling"
+        ],
+        "tests": [
+          "必须先红后绿",
+          "隐藏测试",
+          "解释症状、假设、实验、根因、调用链和防复发"
+        ],
+        "title": "周门禁 3：未知 bug",
+        "why": "防止实现者自己出题、自测并自宣通过。"
+      },
+      {
+        "acceptance": [
+          "能说明为何不用普通 dict",
+          "不变量有测试"
+        ],
+        "ai_policy": "A1",
+        "content": "仅在记录具有不变量时引入对象模型，并保留 dict 对照。",
+        "git_evidence": [
+          "模型源码",
+          "测试",
+          "dict-vs-dataclass 设计记录"
+        ],
+        "id": "D22",
+        "independent_work": [
+          "models.py Resource 记录",
+          "保留 dict 方案对照"
+        ],
+        "official_resources": [
+          "resource.cs50p",
+          "resource.python-library"
+        ],
+        "prerequisites": [
+          "D21"
+        ],
+        "readme_evidence": [
+          "模型不变量和选型结论"
+        ],
+        "remediation": "无法说明模型价值时回退 dict，不强行保留 class。",
+        "resource_scope": "CS50P Week 8 class 基础；dataclasses 基础。",
+        "sequence": 22,
+        "skill_ids": [
+          "skill.models"
+        ],
+        "tests": [
+          "构造",
+          "默认值",
+          "不可变或相等",
+          "错误字段"
+        ],
+        "title": "class 与 dataclass 的边界",
+        "why": "避免为了面向对象而面向对象。"
+      },
+      {
+        "acceptance": [
+          "错误不返回 0",
+          "契约稳定并可机器调用"
+        ],
+        "ai_policy": "A1",
+        "content": "单命令 CLI、参数、帮助和退出码；首轮不引入 subcommand。",
+        "git_evidence": [
+          "CLI 源码",
+          "测试",
+          "smoke 输出"
+        ],
+        "id": "D23",
+        "independent_work": [
+          "cli.py",
+          "resource-linter PATH --format human 或 json",
+          "约定退出码 0/1/2"
+        ],
+        "official_resources": [
+          "resource.python-library"
+        ],
+        "prerequisites": [
+          "D22"
+        ],
+        "readme_evidence": [
+          "usage",
+          "examples",
+          "exit codes"
+        ],
+        "remediation": "契约不稳时冻结最小参数集，先修退出码和测试。",
+        "resource_scope": "argparse Tutorial 的 parser、positional、optional、parse_args。",
+        "sequence": 23,
+        "skill_ids": [
+          "skill.cli"
+        ],
+        "tests": [
+          "--help",
+          "缺参",
+          "坏文件",
+          "三类退出码",
+          "main(argv)",
+          "subprocess smoke"
+        ],
+        "title": "argparse 与 CLI 契约",
+        "why": "把核心逻辑交付为可调用、可测试的工具。"
+      },
+      {
+        "acceptance": [
+          "日志不污染 JSON",
+          "错误上下文足够但无敏感信息"
+        ],
+        "ai_policy": "A1",
+        "content": "日志与机器可读结果分流，建立可观测输出契约。",
+        "git_evidence": [
+          "输出契约文档",
+          "测试",
+          "正常和错误样例"
+        ],
+        "id": "D24",
+        "independent_work": [
+          "logging_config.py",
+          "JSON 和文本输出分离"
+        ],
+        "official_resources": [
+          "resource.python-library"
+        ],
+        "prerequisites": [
+          "D23"
+        ],
+        "readme_evidence": [
+          "stdout/stderr 规则"
+        ],
+        "remediation": "JSON 不能解析时先缩小输出面并重新定义契约。",
+        "resource_scope": "Logging HOWTO 的 Basic Logging。",
+        "sequence": 24,
+        "skill_ids": [
+          "skill.logging"
+        ],
+        "tests": [
+          "JSON stdout 可被解析",
+          "日志级别",
+          "无敏感数据",
+          "错误码"
+        ],
+        "title": "logging、stderr/stdout 与 JSON 输出",
+        "why": "日志不能污染 JSON，也不能泄露敏感数据。"
+      },
+      {
+        "acceptance": [
+          "RED 原因为缺实现而非坏测试",
+          "主分不长期失败"
+        ],
+        "ai_policy": "A1",
+        "content": "先定义 learning-resource-linter 的问题、schema 和验收测试，本日不写核心实现。",
+        "git_evidence": [
+          "设计分支",
+          "RED 测试输出",
+          "fixtures"
+        ],
+        "id": "D25",
+        "independent_work": [
+          "feature/capstone-v01",
+          "docs/design/spec.md",
+          "schema",
+          "验收测试",
+          "定义必填、free 类型、日期、status、基础 URL 和重复规则"
+        ],
+        "official_resources": [
+          "resource.pytest",
+          "resource.pro-git",
+          "resource.python-library"
+        ],
+        "prerequisites": [
+          "D01",
+          "D02",
+          "D03",
+          "D04",
+          "D05",
+          "D06",
+          "D07",
+          "D08",
+          "D09",
+          "D10",
+          "D11",
+          "D12",
+          "D13",
+          "D14",
+          "D15",
+          "D16",
+          "D17",
+          "D18",
+          "D19",
+          "D20",
+          "D21",
+          "D22",
+          "D23",
+          "D24"
+        ],
+        "readme_evidence": [
+          "标记设计中，不宣称可用"
+        ],
+        "remediation": "RED 原因是测试错误时先修测试，仍不写核心实现。",
+        "resource_scope": "复看 pytest 和 Git branch；urllib.parse 的 URL parsing 与 structured results。",
+        "sequence": 25,
+        "skill_ids": [
+          "skill.capstone.resource_linter"
+        ],
+        "tests": [
+          "有效",
+          "缺字段",
+          "坏 JSON",
+          "枚举",
+          "重复",
+          "URL 测试必须按预期 RED"
+        ],
+        "title": "Capstone 规格与 RED 测试",
+        "why": "防止先写实现再倒推需求和测试。"
+      },
+      {
+        "acceptance": [
+          "全部规格通过",
+          "核心逻辑可口述",
+          "关键实现不依赖 AI"
+        ],
+        "ai_policy": "A1",
+        "content": "完成 validator、report 和 CLI 的 RED 到 GREEN。",
+        "git_evidence": [
+          "src/resource_linter/",
+          "测试",
+          "合并 commit"
+        ],
+        "id": "D26",
+        "independent_work": [
+          "validator",
+          "report",
+          "CLI",
+          "基础 URL 规范化",
+          "保留 path/query 语义"
+        ],
+        "official_resources": [],
+        "prerequisites": [
+          "D25"
+        ],
+        "readme_evidence": [
+          "架构",
+          "规则",
+          "限制"
+        ],
+        "remediation": "关键逻辑依赖 AI 或无法解释时无提示重写变体；未通过不进入 D27。",
+        "resource_scope": "只使用 D25 已批准规格和此前已登记资料，不新增框架。",
+        "sequence": 26,
+        "skill_ids": [
+          "skill.capstone.resource_linter"
+        ],
+        "tests": [
+          "D25 全部测试转绿",
+          "新增一个意外边界回归"
+        ],
+        "title": "独立实现 Learning Resource Linter",
+        "why": "把前 25 单元能力收束为一个原创工程闭环。"
+      },
+      {
+        "acceptance": [
+          "本地与 CI 均真实通过",
+          "benchmark 方法可复核"
+        ],
+        "ai_policy": "A1",
+        "content": "修复集成断点，校对安装、复现、测试策略和测量报告。",
+        "git_evidence": [
+          "CI",
+          "benchmark report",
+          "test strategy",
+          "真实 run 链接"
+        ],
+        "id": "D27",
+        "independent_work": [
+          "修复集成断点",
+          "补安装和复现命令",
+          "补测试策略",
+          "不首次引入大型能力"
+        ],
+        "official_resources": [
+          "resource.github-actions-python"
+        ],
+        "prerequisites": [
+          "D26"
+        ],
+        "readme_evidence": [
+          "安装",
+          "复现",
+          "测试",
+          "限制"
+        ],
+        "remediation": "任一失败不得称可发布；超过六小时拆补充单元，不把计划误差算学习失败。",
+        "resource_scope": "实施当天重新核验 GitHub Actions 文档并固定 Action 完整 SHA。",
+        "sequence": 27,
+        "skill_ids": [
+          "skill.packaging.ci",
+          "skill.debugging.profiling",
+          "skill.capstone.resource_linter"
+        ],
+        "tests": [
+          "正常、边界、非法",
+          "干净 venv",
+          "真实 CI",
+          "按既定方法生成 benchmark"
+        ],
+        "title": "集成、文档、CI 与 benchmark 汇总",
+        "why": "把已有局部证据变成可第三方复现的工程包。"
+      },
+      {
+        "acceptance": [
+          "独立评审 PASS",
+          "职责分离",
+          "所有证据真实可复核"
+        ],
+        "ai_policy": "A0",
+        "content": "独立评审者给出新规则，验证能否完成 S0 并进入 S1。",
+        "git_evidence": [
+          "题目、测试、实现、运行、评审身份和 commit",
+          "仅通过后 tag v0.1.0 和 release notes"
+        ],
+        "id": "D28",
+        "independent_work": [
+          "90 分钟从空白增加新规则和测试",
+          "口述数据流",
+          "干净环境复跑"
+        ],
+        "official_resources": [],
+        "prerequisites": [
+          "D01",
+          "D02",
+          "D03",
+          "D04",
+          "D05",
+          "D06",
+          "D07",
+          "D08",
+          "D09",
+          "D10",
+          "D11",
+          "D12",
+          "D13",
+          "D14",
+          "D15",
+          "D16",
+          "D17",
+          "D18",
+          "D19",
+          "D20",
+          "D21",
+          "D22",
+          "D23",
+          "D24",
+          "D25",
+          "D26",
+          "D27"
+        ],
+        "readme_evidence": [
+          "仅通过后更新版本、复现、限制和 release 链接"
+        ],
+        "remediation": "任一核心项失败则禁止 tag、release 和 S1，补两个到七个单元并换题。",
+        "resource_scope": "闭卷，不新增资料；无独立评审题时状态为 BLOCKED。",
+        "sequence": 28,
+        "skill_ids": [
+          "skill.capstone.resource_linter"
+        ],
+        "tests": [
+          "全部门禁",
+          "CI",
+          "CLI smoke",
+          "benchmark",
+          "第三方按 README 复跑"
+        ],
+        "title": "月度发布与总门禁",
+        "why": "只有未知变体、干净复跑和第三方验证才能支持发布。"
+      }
+    ],
+    "plan_windows": [
+      {
+        "daily_hours": {
+          "maximum": 6,
+          "minimum": 3
+        },
+        "daily_main_tasks": 1,
+        "failure_policy": "pause_clock_then_remediate",
+        "id": "window.foundations.01",
+        "name": "S0 第一轮 28 单元",
+        "scheduling": "gate_driven_without_calendar_deadline",
+        "stage_id": "S0",
+        "state": "draft",
+        "unit_ids": [
+          "D01",
+          "D02",
+          "D03",
+          "D04",
+          "D05",
+          "D06",
+          "D07",
+          "D08",
+          "D09",
+          "D10",
+          "D11",
+          "D12",
+          "D13",
+          "D14",
+          "D15",
+          "D16",
+          "D17",
+          "D18",
+          "D19",
+          "D20",
+          "D21",
+          "D22",
+          "D23",
+          "D24",
+          "D25",
+          "D26",
+          "D27",
+          "D28"
+        ]
+      }
+    ],
+    "resources": [
+      {
+        "access": "free",
+        "alternative": "resource.missing-semester",
+        "authority": "GNU Project",
+        "checked_at": "2026-07-21",
+        "difficulty": "intermediate_reference",
+        "id": "resource.bash-manual",
+        "language": [
+          "en"
+        ],
+        "locators": [
+          {
+            "kind": "url",
+            "value": "https://www.gnu.org/software/bash/manual/bash.html"
+          }
+        ],
+        "scope": "3.5、3.6、3.7.5：引用、重定向和退出状态。",
+        "status": "active_needs_recheck",
+        "title": "GNU Bash Reference Manual"
+      },
+      {
+        "access": "free",
+        "alternative": "resource.python-tutorial",
+        "authority": "Harvard University",
+        "checked_at": "2026-07-21",
+        "difficulty": "beginner",
+        "id": "resource.cs50p",
+        "language": [
+          "en"
+        ],
+        "locators": [
+          {
+            "kind": "url",
+            "value": "https://cs50.harvard.edu/python/"
+          }
+        ],
+        "scope": "D1、D4-D9、D15、D18、D22 的指定章节；不公开课程题解。",
+        "status": "active_needs_recheck",
+        "title": "CS50's Introduction to Programming with Python"
+      },
+      {
+        "access": "free",
+        "alternative": "后续原创算法练习",
+        "authority": "Harvard University",
+        "checked_at": "2026-07-21",
+        "difficulty": "beginner",
+        "id": "resource.cs50x-search",
+        "language": [
+          "en"
+        ],
+        "locators": [
+          {
+            "kind": "url",
+            "value": "https://cs50.harvard.edu/x/2026/notes/3/"
+          }
+        ],
+        "scope": "只读 Running Time、Linear Search、Binary Search；跳过课程作业。",
+        "status": "active_needs_recheck",
+        "title": "CS50x 2026 Week 3 Notes"
+      },
+      {
+        "access": "documentation_free_runtime_quota_varies",
+        "alternative": "本地干净环境验证",
+        "authority": "GitHub",
+        "checked_at": "2026-07-21",
+        "difficulty": "beginner",
+        "id": "resource.github-actions-python",
+        "language": [
+          "en"
+        ],
+        "locators": [
+          {
+            "kind": "url",
+            "value": "https://docs.github.com/en/actions/tutorials/build-and-test-code/python"
+          }
+        ],
+        "scope": "checkout、setup、install、test；Action 必须固定到完整 commit SHA。",
+        "status": "rolling_needs_recheck",
+        "title": "Building and testing Python with GitHub Actions"
+      },
+      {
+        "access": "free",
+        "alternative": "resource.bash-manual",
+        "authority": "MIT CSAIL",
+        "checked_at": "2026-07-21",
+        "difficulty": "beginner_to_intermediate",
+        "id": "resource.missing-semester",
+        "language": [
+          "en"
+        ],
+        "locators": [
+          {
+            "kind": "url",
+            "value": "https://missing.csail.mit.edu/2026/"
+          }
+        ],
+        "scope": "Shell、版本控制、调试与 profiling 的指定部分。",
+        "status": "active_needs_recheck",
+        "title": "The Missing Semester of Your CS Education 2026"
+      },
+      {
+        "access": "free",
+        "alternative": "resource.missing-semester",
+        "authority": "Git project",
+        "checked_at": "2026-07-21",
+        "difficulty": "beginner",
+        "id": "resource.pro-git",
+        "language": [
+          "en",
+          "zh"
+        ],
+        "locators": [
+          {
+            "kind": "url",
+            "value": "https://git-scm.com/book/en/v2"
+          }
+        ],
+        "scope": "2.1-2.4、3.1-3.2，后续 branch/tag/release 复核。",
+        "status": "active_needs_recheck",
+        "title": "Pro Git"
+      },
+      {
+        "access": "free",
+        "alternative": "resource.python-library",
+        "authority": "Python Packaging Authority",
+        "checked_at": "2026-07-21",
+        "difficulty": "intermediate",
+        "id": "resource.pypa-packaging",
+        "language": [
+          "en"
+        ],
+        "locators": [
+          {
+            "kind": "url",
+            "value": "https://packaging.python.org/en/latest/tutorials/packaging-projects/"
+          }
+        ],
+        "scope": "最小 pyproject、包目录和本地安装，不发布到 PyPI。",
+        "status": "rolling_needs_recheck",
+        "title": "Packaging Python Projects"
+      },
+      {
+        "access": "free",
+        "alternative": "Python unittest",
+        "authority": "pytest project",
+        "checked_at": "2026-07-21",
+        "difficulty": "beginner_to_intermediate",
+        "id": "resource.pytest",
+        "language": [
+          "en"
+        ],
+        "locators": [
+          {
+            "kind": "url",
+            "value": "https://docs.pytest.org/en/stable/contents.html"
+          }
+        ],
+        "scope": "Getting Started、assertions、fixtures、parametrize。",
+        "status": "rolling_needs_recheck",
+        "title": "pytest documentation"
+      },
+      {
+        "access": "free",
+        "alternative": "resource.python-tutorial",
+        "authority": "Python Software Foundation",
+        "checked_at": "2026-07-21",
+        "difficulty": "beginner_to_intermediate",
+        "id": "resource.python-library",
+        "language": [
+          "en",
+          "zh"
+        ],
+        "locators": [
+          {
+            "kind": "url",
+            "value": "https://docs.python.org/3/library/"
+          }
+        ],
+        "scope": "venv、pathlib、json、csv、argparse、logging、dataclasses、urllib.parse。",
+        "status": "rolling_needs_recheck",
+        "title": "Python Standard Library"
+      },
+      {
+        "access": "free",
+        "alternative": "resource.cs50p",
+        "authority": "Python Software Foundation",
+        "checked_at": "2026-07-21",
+        "difficulty": "beginner_to_intermediate",
+        "id": "resource.python-tutorial",
+        "language": [
+          "en",
+          "zh"
+        ],
+        "locators": [
+          {
+            "kind": "url",
+            "value": "https://docs.python.org/3/tutorial/"
+          }
+        ],
+        "scope": "文本、函数、集合、异常、I/O、模块等指定小节。",
+        "status": "rolling_needs_recheck",
+        "title": "The Python Tutorial"
+      },
+      {
+        "access": "free",
+        "alternative": "bash -n only checks syntax",
+        "authority": "ShellCheck project",
+        "checked_at": "2026-07-21",
+        "difficulty": "beginner_tool",
+        "id": "resource.shellcheck",
+        "language": [
+          "en"
+        ],
+        "locators": [
+          {
+            "kind": "url",
+            "value": "https://github.com/koalaman/shellcheck"
+          }
+        ],
+        "scope": "D2 可用时运行；不可用时至少 bash -n，二者结果不等价。",
+        "status": "active_needs_recheck",
+        "title": "ShellCheck"
+      }
+    ],
+    "skill_edges": [
+      {
+        "id": "edge.001",
+        "prerequisite_id": "skill.python.baseline",
+        "skill_id": "skill.python.functions"
+      },
+      {
+        "id": "edge.002",
+        "prerequisite_id": "skill.git.evidence",
+        "skill_id": "skill.testing"
+      },
+      {
+        "id": "edge.003",
+        "prerequisite_id": "skill.python.functions",
+        "skill_id": "skill.testing"
+      },
+      {
+        "id": "edge.004",
+        "prerequisite_id": "skill.python.functions",
+        "skill_id": "skill.text.unicode"
+      },
+      {
+        "id": "edge.005",
+        "prerequisite_id": "skill.text.unicode",
+        "skill_id": "skill.code.decomposition"
+      },
+      {
+        "id": "edge.006",
+        "prerequisite_id": "skill.code.decomposition",
+        "skill_id": "skill.rules.boundaries"
+      },
+      {
+        "id": "edge.007",
+        "prerequisite_id": "skill.rules.boundaries",
+        "skill_id": "skill.collections"
+      },
+      {
+        "id": "edge.008",
+        "prerequisite_id": "skill.collections",
+        "skill_id": "skill.search.complexity"
+      },
+      {
+        "id": "edge.009",
+        "prerequisite_id": "skill.testing",
+        "skill_id": "skill.exceptions"
+      },
+      {
+        "id": "edge.010",
+        "prerequisite_id": "skill.shell.safety",
+        "skill_id": "skill.packaging.ci"
+      },
+      {
+        "id": "edge.011",
+        "prerequisite_id": "skill.git.evidence",
+        "skill_id": "skill.packaging.ci"
+      },
+      {
+        "id": "edge.012",
+        "prerequisite_id": "skill.exceptions",
+        "skill_id": "skill.packaging.ci"
+      },
+      {
+        "id": "edge.013",
+        "prerequisite_id": "skill.packaging.ci",
+        "skill_id": "skill.file.io"
+      },
+      {
+        "id": "edge.014",
+        "prerequisite_id": "skill.file.io",
+        "skill_id": "skill.serialization"
+      },
+      {
+        "id": "edge.015",
+        "prerequisite_id": "skill.serialization",
+        "skill_id": "skill.debugging.profiling"
+      },
+      {
+        "id": "edge.016",
+        "prerequisite_id": "skill.collections",
+        "skill_id": "skill.models"
+      },
+      {
+        "id": "edge.017",
+        "prerequisite_id": "skill.models",
+        "skill_id": "skill.cli"
+      },
+      {
+        "id": "edge.018",
+        "prerequisite_id": "skill.cli",
+        "skill_id": "skill.logging"
+      },
+      {
+        "id": "edge.019",
+        "prerequisite_id": "skill.debugging.profiling",
+        "skill_id": "skill.capstone.resource_linter"
+      },
+      {
+        "id": "edge.020",
+        "prerequisite_id": "skill.logging",
+        "skill_id": "skill.capstone.resource_linter"
+      },
+      {
+        "id": "edge.021",
+        "prerequisite_id": "skill.search.complexity",
+        "skill_id": "skill.capstone.resource_linter"
+      }
+    ],
+    "skills": [
+      {
+        "description": "以规格、测试、实现、CI、benchmark 和 release 完成 S0 闭环。",
+        "id": "skill.capstone.resource_linter",
+        "name": "Learning Resource Linter",
+        "stage_id": "S0",
+        "status": "active"
+      },
+      {
+        "description": "argparse、stdout/stderr 和退出码。",
+        "id": "skill.cli",
+        "name": "CLI 契约",
+        "stage_id": "S0",
+        "status": "active"
+      },
+      {
+        "description": "单一职责、输入输出和可测分层。",
+        "id": "skill.code.decomposition",
+        "name": "函数分解与数据流",
+        "stage_id": "S0",
+        "status": "active"
+      },
+      {
+        "description": "循环、序列、字典、集合和嵌套记录。",
+        "id": "skill.collections",
+        "name": "迭代与集合",
+        "stage_id": "S0",
+        "status": "active"
+      },
+      {
+        "description": "先红后绿、根因、回归和基础 benchmark 方法。",
+        "id": "skill.debugging.profiling",
+        "name": "调试与测量",
+        "stage_id": "S0",
+        "status": "active"
+      },
+      {
+        "description": "区分用户错误、环境错误和程序 bug。",
+        "id": "skill.exceptions",
+        "name": "异常契约",
+        "stage_id": "S0",
+        "status": "active"
+      },
+      {
+        "description": "pathlib、文本读写和路径边界。",
+        "id": "skill.file.io",
+        "name": "安全文件 I/O",
+        "stage_id": "S0",
+        "status": "active"
+      },
+      {
+        "description": "working tree、stage、commit、branch、diff、冲突和恢复。",
+        "id": "skill.git.evidence",
+        "name": "Git 证据工作流",
+        "stage_id": "S0",
+        "status": "active"
+      },
+      {
+        "description": "日志不污染 JSON，且不泄露敏感数据。",
+        "id": "skill.logging",
+        "name": "日志与机器输出",
+        "stage_id": "S0",
+        "status": "active"
+      },
+      {
+        "description": "dict 与 dataclass 的使用边界。",
+        "id": "skill.models",
+        "name": "记录建模",
+        "stage_id": "S0",
+        "status": "active"
+      },
+      {
+        "description": "module、venv、pyproject 和干净复现。",
+        "id": "skill.packaging.ci",
+        "name": "包、环境与最小 CI",
+        "stage_id": "S0",
+        "status": "active"
+      },
+      {
+        "description": "先冻结真实起点，再阅读资料和补课。",
+        "id": "skill.python.baseline",
+        "name": "Python 无 AI 基线诊断",
+        "stage_id": "S0",
+        "status": "active"
+      },
+      {
+        "description": "变量、函数、参数、返回值和类型提示。",
+        "id": "skill.python.functions",
+        "name": "Python 函数与契约",
+        "stage_id": "S0",
+        "status": "active"
+      },
+      {
+        "description": "条件、布尔逻辑、真值表和边界。",
+        "id": "skill.rules.boundaries",
+        "name": "规则与边界",
+        "stage_id": "S0",
+        "status": "active"
+      },
+      {
+        "description": "线性查找、二分前置和比较次数。",
+        "id": "skill.search.complexity",
+        "name": "查找与复杂度直觉",
+        "stage_id": "S0",
+        "status": "active"
+      },
+      {
+        "description": "统一记录、错误定位和 round-trip。",
+        "id": "skill.serialization",
+        "name": "JSON 与 CSV",
+        "stage_id": "S0",
+        "status": "active"
+      },
+      {
+        "description": "路径、引用、权限、重定向和退出码。",
+        "id": "skill.shell.safety",
+        "name": "Shell 安全基础",
+        "stage_id": "S0",
+        "status": "active"
+      },
+      {
+        "description": "正常、边界、非法输入与回归测试。",
+        "id": "skill.testing",
+        "name": "自动化测试",
+        "stage_id": "S0",
+        "status": "active"
+      },
+      {
+        "description": "字符串、数字转换、编码和规范化。",
+        "id": "skill.text.unicode",
+        "name": "文本与 Unicode",
+        "stage_id": "S0",
+        "status": "active"
+      }
+    ],
+    "stages": [
+      {
+        "id": "R-AI",
+        "name": "AI Infra / ML Platform 就业桥梁",
+        "prerequisites": [
+          "S3b"
+        ],
+        "state": "locked"
+      },
+      {
+        "id": "S0",
+        "name": "工程起点",
+        "non_goals": [
+          "Go",
+          "Rust",
+          "Kubernetes 源码",
+          "PyTorch",
+          "平台中间件"
+        ],
+        "prerequisites": [],
+        "state": "active"
+      },
+      {
+        "id": "S1",
+        "name": "算法、离散与 C 桥梁",
+        "prerequisites": [
+          "S0"
+        ],
+        "state": "locked"
+      },
+      {
+        "id": "S10",
+        "name": "论文复现与研究",
+        "prerequisites": [
+          "S8",
+          "S9b"
+        ],
+        "state": "locked"
+      },
+      {
+        "id": "S2a",
+        "name": "操作系统最小核心",
+        "prerequisites": [
+          "S1"
+        ],
+        "state": "locked"
+      },
+      {
+        "id": "S2b",
+        "name": "网络与数据库核心",
+        "prerequisites": [
+          "S3a"
+        ],
+        "state": "locked"
+      },
+      {
+        "id": "S3a",
+        "name": "Go 工程",
+        "prerequisites": [
+          "S1",
+          "S2a"
+        ],
+        "state": "locked"
+      },
+      {
+        "id": "S3b",
+        "name": "Kubernetes 开发",
+        "prerequisites": [
+          "S3a",
+          "S2b"
+        ],
+        "state": "locked"
+      },
+      {
+        "id": "S4a",
+        "name": "分布式系统核心",
+        "prerequisites": [
+          "S2b",
+          "S3a"
+        ],
+        "state": "locked"
+      },
+      {
+        "id": "S4b",
+        "name": "Kubernetes 源码与调度扩展",
+        "prerequisites": [
+          "S3b"
+        ],
+        "state": "locked"
+      },
+      {
+        "id": "S5",
+        "name": "数学与 PyTorch",
+        "prerequisites": [
+          "S1"
+        ],
+        "state": "locked"
+      },
+      {
+        "id": "S6",
+        "name": "Transformer 与 LLM",
+        "prerequisites": [
+          "S5"
+        ],
+        "state": "locked"
+      },
+      {
+        "id": "S7",
+        "name": "GPU 编程",
+        "prerequisites": [
+          "S2a",
+          "S6"
+        ],
+        "state": "locked"
+      },
+      {
+        "id": "S8",
+        "name": "训练与推理系统",
+        "prerequisites": [
+          "S4a",
+          "S6",
+          "S7"
+        ],
+        "state": "locked"
+      },
+      {
+        "id": "S9a",
+        "name": "强化学习基础",
+        "prerequisites": [
+          "S5",
+          "S6"
+        ],
+        "state": "locked"
+      },
+      {
+        "id": "S9b",
+        "name": "后训练与 Agent RL",
+        "prerequisites": [
+          "S9a",
+          "S6"
+        ],
+        "state": "locked"
+      }
+    ],
+    "tasks": [
+      {
+        "evidence_ids": [],
+        "id": "task.D01",
+        "plan_unit_id": "D01",
+        "plan_window_id": "window.foundations.01",
+        "state": "planned"
+      },
+      {
+        "evidence_ids": [],
+        "id": "task.D02",
+        "plan_unit_id": "D02",
+        "plan_window_id": "window.foundations.01",
+        "state": "planned"
+      },
+      {
+        "evidence_ids": [],
+        "id": "task.D03",
+        "plan_unit_id": "D03",
+        "plan_window_id": "window.foundations.01",
+        "state": "planned"
+      },
+      {
+        "evidence_ids": [],
+        "id": "task.D04",
+        "plan_unit_id": "D04",
+        "plan_window_id": "window.foundations.01",
+        "state": "planned"
+      },
+      {
+        "evidence_ids": [],
+        "id": "task.D05",
+        "plan_unit_id": "D05",
+        "plan_window_id": "window.foundations.01",
+        "state": "planned"
+      },
+      {
+        "evidence_ids": [],
+        "id": "task.D06",
+        "plan_unit_id": "D06",
+        "plan_window_id": "window.foundations.01",
+        "state": "planned"
+      },
+      {
+        "evidence_ids": [],
+        "id": "task.D07",
+        "plan_unit_id": "D07",
+        "plan_window_id": "window.foundations.01",
+        "state": "planned"
+      },
+      {
+        "evidence_ids": [],
+        "id": "task.D08",
+        "plan_unit_id": "D08",
+        "plan_window_id": "window.foundations.01",
+        "state": "planned"
+      },
+      {
+        "evidence_ids": [],
+        "id": "task.D09",
+        "plan_unit_id": "D09",
+        "plan_window_id": "window.foundations.01",
+        "state": "planned"
+      },
+      {
+        "evidence_ids": [],
+        "id": "task.D10",
+        "plan_unit_id": "D10",
+        "plan_window_id": "window.foundations.01",
+        "state": "planned"
+      },
+      {
+        "evidence_ids": [],
+        "id": "task.D11",
+        "plan_unit_id": "D11",
+        "plan_window_id": "window.foundations.01",
+        "state": "planned"
+      },
+      {
+        "evidence_ids": [],
+        "id": "task.D12",
+        "plan_unit_id": "D12",
+        "plan_window_id": "window.foundations.01",
+        "state": "planned"
+      },
+      {
+        "evidence_ids": [],
+        "id": "task.D13",
+        "plan_unit_id": "D13",
+        "plan_window_id": "window.foundations.01",
+        "state": "planned"
+      },
+      {
+        "evidence_ids": [],
+        "id": "task.D14",
+        "plan_unit_id": "D14",
+        "plan_window_id": "window.foundations.01",
+        "state": "planned"
+      },
+      {
+        "evidence_ids": [],
+        "id": "task.D15",
+        "plan_unit_id": "D15",
+        "plan_window_id": "window.foundations.01",
+        "state": "planned"
+      },
+      {
+        "evidence_ids": [],
+        "id": "task.D16",
+        "plan_unit_id": "D16",
+        "plan_window_id": "window.foundations.01",
+        "state": "planned"
+      },
+      {
+        "evidence_ids": [],
+        "id": "task.D17",
+        "plan_unit_id": "D17",
+        "plan_window_id": "window.foundations.01",
+        "state": "planned"
+      },
+      {
+        "evidence_ids": [],
+        "id": "task.D18",
+        "plan_unit_id": "D18",
+        "plan_window_id": "window.foundations.01",
+        "state": "planned"
+      },
+      {
+        "evidence_ids": [],
+        "id": "task.D19",
+        "plan_unit_id": "D19",
+        "plan_window_id": "window.foundations.01",
+        "state": "planned"
+      },
+      {
+        "evidence_ids": [],
+        "id": "task.D20",
+        "plan_unit_id": "D20",
+        "plan_window_id": "window.foundations.01",
+        "state": "planned"
+      },
+      {
+        "evidence_ids": [],
+        "id": "task.D21",
+        "plan_unit_id": "D21",
+        "plan_window_id": "window.foundations.01",
+        "state": "planned"
+      },
+      {
+        "evidence_ids": [],
+        "id": "task.D22",
+        "plan_unit_id": "D22",
+        "plan_window_id": "window.foundations.01",
+        "state": "planned"
+      },
+      {
+        "evidence_ids": [],
+        "id": "task.D23",
+        "plan_unit_id": "D23",
+        "plan_window_id": "window.foundations.01",
+        "state": "planned"
+      },
+      {
+        "evidence_ids": [],
+        "id": "task.D24",
+        "plan_unit_id": "D24",
+        "plan_window_id": "window.foundations.01",
+        "state": "planned"
+      },
+      {
+        "evidence_ids": [],
+        "id": "task.D25",
+        "plan_unit_id": "D25",
+        "plan_window_id": "window.foundations.01",
+        "state": "planned"
+      },
+      {
+        "evidence_ids": [],
+        "id": "task.D26",
+        "plan_unit_id": "D26",
+        "plan_window_id": "window.foundations.01",
+        "state": "planned"
+      },
+      {
+        "evidence_ids": [],
+        "id": "task.D27",
+        "plan_unit_id": "D27",
+        "plan_window_id": "window.foundations.01",
+        "state": "planned"
+      },
+      {
+        "evidence_ids": [],
+        "id": "task.D28",
+        "plan_unit_id": "D28",
+        "plan_window_id": "window.foundations.01",
+        "state": "planned"
+      }
+    ],
+    "unit_support": [
+      {
+        "chinese_supplement": {
+          "items": [],
+          "status": "deferred_until_part_b"
+        },
+        "expiry_policy": {
+          "change_policy": "new_revision",
+          "resource_recheck_days": 30
+        },
+        "github_references": {
+          "items": [],
+          "status": "forbidden_for_part_a"
+        },
+        "id": "support.D01",
+        "plan_unit_id": "D01",
+        "practice_mapping": {
+          "sre_platform": "冻结文本解析与错误处理的真实起点。",
+          "tech_radar": "为后续资源元数据解析建立真实能力基线。"
+        },
+        "review_policy": {
+          "gate": "GATE-S0-W1",
+          "schedule": [
+            "P1D",
+            "P7D",
+            "P30D"
+          ]
+        },
+        "youtube": {
+          "items": [],
+          "status": "deferred_until_part_b"
+        }
+      },
+      {
+        "chinese_supplement": {
+          "items": [],
+          "status": "official_or_reviewed_only"
+        },
+        "expiry_policy": {
+          "change_policy": "new_revision",
+          "resource_recheck_days": 30
+        },
+        "github_references": {
+          "items": [
+            "https://github.com/koalaman/shellcheck"
+          ],
+          "status": "official_tool_reference_only"
+        },
+        "id": "support.D02",
+        "plan_unit_id": "D02",
+        "practice_mapping": {
+          "sre_platform": "安全路径检查和只读采集脚本。",
+          "tech_radar": "采集作业的退出码与文件边界。"
+        },
+        "review_policy": {
+          "gate": "GATE-S0-W1",
+          "schedule": [
+            "P1D",
+            "P7D",
+            "P30D"
+          ]
+        },
+        "youtube": {
+          "items": [],
+          "status": "optional_unselected"
+        }
+      },
+      {
+        "chinese_supplement": {
+          "items": [
+            "https://git-scm.com/book/zh/v2"
+          ],
+          "status": "pro_git_translation_available"
+        },
+        "expiry_policy": {
+          "change_policy": "new_revision",
+          "resource_recheck_days": 90
+        },
+        "github_references": {
+          "items": [],
+          "status": "workflow_reference_only"
+        },
+        "id": "support.D03",
+        "plan_unit_id": "D03",
+        "practice_mapping": {
+          "sre_platform": "功能、修复和回滚使用独立 PR 留证。",
+          "tech_radar": "资源变更通过提案和 PR 审查。"
+        },
+        "review_policy": {
+          "gate": "GATE-S0-W1",
+          "schedule": [
+            "P1D",
+            "P7D",
+            "P30D"
+          ]
+        },
+        "youtube": {
+          "items": [],
+          "status": "optional_unselected"
+        }
+      },
+      {
+        "chinese_supplement": {
+          "items": [
+            "https://docs.python.org/zh-cn/3/"
+          ],
+          "status": "official_python_translation"
+        },
+        "expiry_policy": {
+          "change_policy": "new_revision",
+          "resource_recheck_days": 30
+        },
+        "github_references": {
+          "items": [],
+          "status": "no_solution_copy"
+        },
+        "id": "support.D04",
+        "plan_unit_id": "D04",
+        "practice_mapping": {
+          "sre_platform": "把采集判断拆成可测纯函数。",
+          "tech_radar": "为评分和资源校验建立最小测试。"
+        },
+        "review_policy": {
+          "gate": "GATE-S0-W1",
+          "schedule": [
+            "P1D",
+            "P7D",
+            "P30D"
+          ]
+        },
+        "youtube": {
+          "items": [],
+          "status": "optional_unselected"
+        }
+      },
+      {
+        "chinese_supplement": {
+          "items": [
+            "https://docs.python.org/zh-cn/3/tutorial/"
+          ],
+          "status": "official_python_translation"
+        },
+        "expiry_policy": {
+          "change_policy": "new_revision",
+          "resource_recheck_days": 30
+        },
+        "github_references": {
+          "items": [],
+          "status": "no_solution_copy"
+        },
+        "id": "support.D05",
+        "plan_unit_id": "D05",
+        "practice_mapping": {
+          "sre_platform": "规范日志和命令输出中的 Unicode。",
+          "tech_radar": "规范标题、标签和多语言摘要。"
+        },
+        "review_policy": {
+          "gate": "GATE-S0-W1",
+          "schedule": [
+            "P1D",
+            "P7D",
+            "P30D"
+          ]
+        },
+        "youtube": {
+          "items": [],
+          "status": "optional_unselected"
+        }
+      },
+      {
+        "chinese_supplement": {
+          "items": [
+            "https://docs.python.org/zh-cn/3/tutorial/controlflow.html"
+          ],
+          "status": "official_python_translation"
+        },
+        "expiry_policy": {
+          "change_policy": "new_revision",
+          "resource_recheck_days": 30
+        },
+        "github_references": {
+          "items": [],
+          "status": "no_solution_copy"
+        },
+        "id": "support.D06",
+        "plan_unit_id": "D06",
+        "practice_mapping": {
+          "sre_platform": "拆分采集、判断、报告边界。",
+          "tech_radar": "拆分解析、评分、输出边界。"
+        },
+        "review_policy": {
+          "gate": "GATE-S0-W1",
+          "schedule": [
+            "P1D",
+            "P7D",
+            "P30D"
+          ]
+        },
+        "youtube": {
+          "items": [],
+          "status": "optional_unselected"
+        }
+      },
+      {
+        "chinese_supplement": {
+          "items": [],
+          "status": "forbidden_during_gate"
+        },
+        "expiry_policy": {
+          "change_policy": "new_gate_version",
+          "resource_recheck_days": 0
+        },
+        "github_references": {
+          "items": [],
+          "status": "forbidden_during_gate"
+        },
+        "id": "support.D07",
+        "plan_unit_id": "D07",
+        "practice_mapping": {
+          "sre_platform": "用不同文本题证明基础可迁移。",
+          "tech_radar": "用未知资源样例证明解析基础。"
+        },
+        "review_policy": {
+          "gate": "GATE-S0-W1",
+          "schedule": [
+            "P7D",
+            "P30D"
+          ]
+        },
+        "youtube": {
+          "items": [],
+          "status": "forbidden_during_gate"
+        }
+      },
+      {
+        "chinese_supplement": {
+          "items": [
+            "https://docs.python.org/zh-cn/3/tutorial/controlflow.html"
+          ],
+          "status": "official_python_translation"
+        },
+        "expiry_policy": {
+          "change_policy": "new_revision",
+          "resource_recheck_days": 30
+        },
+        "github_references": {
+          "items": [],
+          "status": "no_solution_copy"
+        },
+        "id": "support.D08",
+        "plan_unit_id": "D08",
+        "practice_mapping": {
+          "sre_platform": "确定性检查规则和风险边界。",
+          "tech_radar": "资源字段、状态与评分规则。"
+        },
+        "review_policy": {
+          "gate": "GATE-S0-W2",
+          "schedule": [
+            "P1D",
+            "P7D",
+            "P30D"
+          ]
+        },
+        "youtube": {
+          "items": [],
+          "status": "optional_unselected"
+        }
+      },
+      {
+        "chinese_supplement": {
+          "items": [
+            "https://docs.python.org/zh-cn/3/tutorial/controlflow.html"
+          ],
+          "status": "official_python_translation"
+        },
+        "expiry_policy": {
+          "change_policy": "new_revision",
+          "resource_recheck_days": 30
+        },
+        "github_references": {
+          "items": [],
+          "status": "no_solution_copy"
+        },
+        "id": "support.D09",
+        "plan_unit_id": "D09",
+        "practice_mapping": {
+          "sre_platform": "批量节点或模块的有界遍历。",
+          "tech_radar": "批量资源记录并保留错误位置。"
+        },
+        "review_policy": {
+          "gate": "GATE-S0-W2",
+          "schedule": [
+            "P1D",
+            "P7D",
+            "P30D"
+          ]
+        },
+        "youtube": {
+          "items": [],
+          "status": "optional_unselected"
+        }
+      },
+      {
+        "chinese_supplement": {
+          "items": [
+            "https://docs.python.org/zh-cn/3/tutorial/datastructures.html"
+          ],
+          "status": "official_python_translation"
+        },
+        "expiry_policy": {
+          "change_policy": "new_revision",
+          "resource_recheck_days": 30
+        },
+        "github_references": {
+          "items": [],
+          "status": "no_solution_copy"
+        },
+        "id": "support.D10",
+        "plan_unit_id": "D10",
+        "practice_mapping": {
+          "sre_platform": "批量采集输入不被意外修改。",
+          "tech_radar": "稳定保留资源顺序和批次语义。"
+        },
+        "review_policy": {
+          "gate": "GATE-S0-W2",
+          "schedule": [
+            "P1D",
+            "P7D",
+            "P30D"
+          ]
+        },
+        "youtube": {
+          "items": [],
+          "status": "optional_unselected"
+        }
+      },
+      {
+        "chinese_supplement": {
+          "items": [
+            "https://docs.python.org/zh-cn/3/tutorial/datastructures.html"
+          ],
+          "status": "official_python_translation"
+        },
+        "expiry_policy": {
+          "change_policy": "new_revision",
+          "resource_recheck_days": 30
+        },
+        "github_references": {
+          "items": [],
+          "status": "no_solution_copy"
+        },
+        "id": "support.D11",
+        "plan_unit_id": "D11",
+        "practice_mapping": {
+          "sre_platform": "节点、服务和证据索引。",
+          "tech_radar": "URL 去重、ID 索引和状态统计。"
+        },
+        "review_policy": {
+          "gate": "GATE-S0-W2",
+          "schedule": [
+            "P1D",
+            "P7D",
+            "P30D"
+          ]
+        },
+        "youtube": {
+          "items": [],
+          "status": "optional_unselected"
+        }
+      },
+      {
+        "chinese_supplement": {
+          "items": [
+            "https://docs.python.org/zh-cn/3/tutorial/datastructures.html"
+          ],
+          "status": "official_python_translation"
+        },
+        "expiry_policy": {
+          "change_policy": "new_revision",
+          "resource_recheck_days": 30
+        },
+        "github_references": {
+          "items": [],
+          "status": "no_solution_copy"
+        },
+        "id": "support.D12",
+        "plan_unit_id": "D12",
+        "practice_mapping": {
+          "sre_platform": "结构化 Finding 和字段级错误。",
+          "tech_radar": "资源 schema 和多错误报告。"
+        },
+        "review_policy": {
+          "gate": "GATE-S0-W2",
+          "schedule": [
+            "P1D",
+            "P7D",
+            "P30D"
+          ]
+        },
+        "youtube": {
+          "items": [],
+          "status": "optional_unselected"
+        }
+      },
+      {
+        "chinese_supplement": {
+          "items": [],
+          "status": "reviewed_supplement_not_selected"
+        },
+        "expiry_policy": {
+          "change_policy": "new_revision",
+          "resource_recheck_days": 30
+        },
+        "github_references": {
+          "items": [],
+          "status": "course_solution_forbidden"
+        },
+        "id": "support.D13",
+        "plan_unit_id": "D13",
+        "practice_mapping": {
+          "sre_platform": "在有界数据中选择线性或有序查找。",
+          "tech_radar": "理解资源索引查找的前置与规模。"
+        },
+        "review_policy": {
+          "gate": "GATE-S0-W2",
+          "schedule": [
+            "P1D",
+            "P7D",
+            "P30D"
+          ]
+        },
+        "youtube": {
+          "items": [],
+          "status": "optional_unselected"
+        }
+      },
+      {
+        "chinese_supplement": {
+          "items": [],
+          "status": "forbidden_during_gate"
+        },
+        "expiry_policy": {
+          "change_policy": "new_gate_version",
+          "resource_recheck_days": 0
+        },
+        "github_references": {
+          "items": [],
+          "status": "forbidden_during_gate"
+        },
+        "id": "support.D14",
+        "plan_unit_id": "D14",
+        "practice_mapping": {
+          "sre_platform": "用未知规则题证明数据结构可迁移。",
+          "tech_radar": "用未知重复和查找题验证基础。"
+        },
+        "review_policy": {
+          "gate": "GATE-S0-W2",
+          "schedule": [
+            "P7D",
+            "P30D"
+          ]
+        },
+        "youtube": {
+          "items": [],
+          "status": "forbidden_during_gate"
+        }
+      },
+      {
+        "chinese_supplement": {
+          "items": [
+            "https://docs.python.org/zh-cn/3/tutorial/errors.html"
+          ],
+          "status": "official_python_translation"
+        },
+        "expiry_policy": {
+          "change_policy": "new_revision",
+          "resource_recheck_days": 30
+        },
+        "github_references": {
+          "items": [],
+          "status": "no_solution_copy"
+        },
+        "id": "support.D15",
+        "plan_unit_id": "D15",
+        "practice_mapping": {
+          "sre_platform": "区分现场输入错误、环境错误和程序 bug。",
+          "tech_radar": "资源损坏、网络未知和程序异常分层。"
+        },
+        "review_policy": {
+          "gate": "GATE-S0-W3",
+          "schedule": [
+            "P1D",
+            "P7D",
+            "P30D"
+          ]
+        },
+        "youtube": {
+          "items": [],
+          "status": "optional_unselected"
+        }
+      },
+      {
+        "chinese_supplement": {
+          "items": [
+            "https://docs.python.org/zh-cn/3/library/venv.html"
+          ],
+          "status": "official_python_translation"
+        },
+        "expiry_policy": {
+          "change_policy": "new_revision",
+          "resource_recheck_days": 14
+        },
+        "github_references": {
+          "items": [
+            "https://github.com/actions/checkout",
+            "https://github.com/actions/setup-python"
+          ],
+          "status": "official_actions_only"
+        },
+        "id": "support.D16",
+        "plan_unit_id": "D16",
+        "practice_mapping": {
+          "sre_platform": "插件和 CLI 的干净构建边界。",
+          "tech_radar": "应用测试与可复现环境。"
+        },
+        "review_policy": {
+          "gate": "GATE-S0-W3",
+          "schedule": [
+            "P1D",
+            "P7D",
+            "P30D"
+          ]
+        },
+        "youtube": {
+          "items": [],
+          "status": "optional_unselected"
+        }
+      },
+      {
+        "chinese_supplement": {
+          "items": [
+            "https://docs.python.org/zh-cn/3/library/pathlib.html"
+          ],
+          "status": "official_python_translation"
+        },
+        "expiry_policy": {
+          "change_policy": "new_revision",
+          "resource_recheck_days": 30
+        },
+        "github_references": {
+          "items": [],
+          "status": "no_solution_copy"
+        },
+        "id": "support.D17",
+        "plan_unit_id": "D17",
+        "practice_mapping": {
+          "sre_platform": "只读采集和受控报告路径。",
+          "tech_radar": "安全加载和导出资源文件。"
+        },
+        "review_policy": {
+          "gate": "GATE-S0-W3",
+          "schedule": [
+            "P1D",
+            "P7D",
+            "P30D"
+          ]
+        },
+        "youtube": {
+          "items": [],
+          "status": "optional_unselected"
+        }
+      },
+      {
+        "chinese_supplement": {
+          "items": [
+            "https://docs.python.org/zh-cn/3/library/json.html",
+            "https://docs.python.org/zh-cn/3/library/csv.html"
+          ],
+          "status": "official_python_translation"
+        },
+        "expiry_policy": {
+          "change_policy": "new_revision",
+          "resource_recheck_days": 30
+        },
+        "github_references": {
+          "items": [],
+          "status": "no_solution_copy"
+        },
+        "id": "support.D18",
+        "plan_unit_id": "D18",
+        "practice_mapping": {
+          "sre_platform": "结构化证据和报告交换。",
+          "tech_radar": "资源导入、导出和 schema 版本。"
+        },
+        "review_policy": {
+          "gate": "GATE-S0-W3",
+          "schedule": [
+            "P1D",
+            "P7D",
+            "P30D"
+          ]
+        },
+        "youtube": {
+          "items": [],
+          "status": "optional_unselected"
+        }
+      },
+      {
+        "chinese_supplement": {
+          "items": [],
+          "status": "reviewed_supplement_not_selected"
+        },
+        "expiry_policy": {
+          "change_policy": "new_revision",
+          "resource_recheck_days": 30
+        },
+        "github_references": {
+          "items": [
+            "https://github.com/pytest-dev/pytest"
+          ],
+          "status": "official_pytest_examples_only"
+        },
+        "id": "support.D19",
+        "plan_unit_id": "D19",
+        "practice_mapping": {
+          "sre_platform": "插件规则的等价类和 fixture。",
+          "tech_radar": "资源评分和解析的参数化测试。"
+        },
+        "review_policy": {
+          "gate": "GATE-S0-W3",
+          "schedule": [
+            "P1D",
+            "P7D",
+            "P30D"
+          ]
+        },
+        "youtube": {
+          "items": [],
+          "status": "optional_unselected"
+        }
+      },
+      {
+        "chinese_supplement": {
+          "items": [],
+          "status": "reviewed_supplement_not_selected"
+        },
+        "expiry_policy": {
+          "change_policy": "new_revision",
+          "resource_recheck_days": 30
+        },
+        "github_references": {
+          "items": [],
+          "status": "no_solution_copy"
+        },
+        "id": "support.D20",
+        "plan_unit_id": "D20",
+        "practice_mapping": {
+          "sre_platform": "故障复现、根因、回归和有界性能测量。",
+          "tech_radar": "采集/校验性能证据和失败复盘。"
+        },
+        "review_policy": {
+          "gate": "GATE-S0-W3",
+          "schedule": [
+            "P1D",
+            "P7D",
+            "P30D"
+          ]
+        },
+        "youtube": {
+          "items": [],
+          "status": "optional_unselected"
+        }
+      },
+      {
+        "chinese_supplement": {
+          "items": [],
+          "status": "forbidden_during_gate"
+        },
+        "expiry_policy": {
+          "change_policy": "new_hidden_pack_hash",
+          "resource_recheck_days": 0
+        },
+        "github_references": {
+          "items": [],
+          "status": "hidden_pack_only"
+        },
+        "id": "support.D21",
+        "plan_unit_id": "D21",
+        "practice_mapping": {
+          "sre_platform": "未知故障的先红后绿修复。",
+          "tech_radar": "未知解析或状态 bug 的独立复跑。"
+        },
+        "review_policy": {
+          "gate": "GATE-S0-W3",
+          "schedule": [
+            "P7D",
+            "P30D"
+          ]
+        },
+        "youtube": {
+          "items": [],
+          "status": "forbidden_during_gate"
+        }
+      },
+      {
+        "chinese_supplement": {
+          "items": [
+            "https://docs.python.org/zh-cn/3/library/dataclasses.html"
+          ],
+          "status": "official_python_translation"
+        },
+        "expiry_policy": {
+          "change_policy": "new_revision",
+          "resource_recheck_days": 30
+        },
+        "github_references": {
+          "items": [],
+          "status": "no_solution_copy"
+        },
+        "id": "support.D22",
+        "plan_unit_id": "D22",
+        "practice_mapping": {
+          "sre_platform": "Finding/Target 模型的不变量。",
+          "tech_radar": "Resource 记录的模型边界。"
+        },
+        "review_policy": {
+          "gate": "GATE-S0-M1",
+          "schedule": [
+            "P1D",
+            "P7D",
+            "P30D"
+          ]
+        },
+        "youtube": {
+          "items": [],
+          "status": "optional_unselected"
+        }
+      },
+      {
+        "chinese_supplement": {
+          "items": [
+            "https://docs.python.org/zh-cn/3/howto/argparse.html"
+          ],
+          "status": "official_python_translation"
+        },
+        "expiry_policy": {
+          "change_policy": "new_revision",
+          "resource_recheck_days": 30
+        },
+        "github_references": {
+          "items": [],
+          "status": "no_solution_copy"
+        },
+        "id": "support.D23",
+        "plan_unit_id": "D23",
+        "practice_mapping": {
+          "sre_platform": "现场 CLI 参数和退出码合同。",
+          "tech_radar": "资源校验命令的机器调用接口。"
+        },
+        "review_policy": {
+          "gate": "GATE-S0-M1",
+          "schedule": [
+            "P1D",
+            "P7D",
+            "P30D"
+          ]
+        },
+        "youtube": {
+          "items": [],
+          "status": "optional_unselected"
+        }
+      },
+      {
+        "chinese_supplement": {
+          "items": [
+            "https://docs.python.org/zh-cn/3/howto/logging.html"
+          ],
+          "status": "official_python_translation"
+        },
+        "expiry_policy": {
+          "change_policy": "new_revision",
+          "resource_recheck_days": 30
+        },
+        "github_references": {
+          "items": [],
+          "status": "no_solution_copy"
+        },
+        "id": "support.D24",
+        "plan_unit_id": "D24",
+        "practice_mapping": {
+          "sre_platform": "结构化输出和可排障日志分流。",
+          "tech_radar": "JSON 投影与日志不互相污染。"
+        },
+        "review_policy": {
+          "gate": "GATE-S0-M1",
+          "schedule": [
+            "P1D",
+            "P7D",
+            "P30D"
+          ]
+        },
+        "youtube": {
+          "items": [],
+          "status": "optional_unselected"
+        }
+      },
+      {
+        "chinese_supplement": {
+          "items": [],
+          "status": "not_used_for_spec"
+        },
+        "expiry_policy": {
+          "change_policy": "new_spec_revision",
+          "resource_recheck_days": 14
+        },
+        "github_references": {
+          "items": [],
+          "status": "official_library_reference_only"
+        },
+        "id": "support.D25",
+        "plan_unit_id": "D25",
+        "practice_mapping": {
+          "sre_platform": "先定义只读规则、风险和验收再实现。",
+          "tech_radar": "Learning Resource Linter 直接校验资源种子。"
+        },
+        "review_policy": {
+          "gate": "GATE-S0-M1",
+          "schedule": [
+            "P1D",
+            "P7D",
+            "P30D"
+          ]
+        },
+        "youtube": {
+          "items": [],
+          "status": "not_used_for_spec"
+        }
+      },
+      {
+        "chinese_supplement": {
+          "items": [],
+          "status": "not_used_for_core_implementation"
+        },
+        "expiry_policy": {
+          "change_policy": "new_implementation_commit",
+          "resource_recheck_days": 0
+        },
+        "github_references": {
+          "items": [],
+          "status": "no_solution_copy"
+        },
+        "id": "support.D26",
+        "plan_unit_id": "D26",
+        "practice_mapping": {
+          "sre_platform": "可复用规则校验器的工程闭环。",
+          "tech_radar": "正式资源进入系统前的确定性校验。"
+        },
+        "review_policy": {
+          "gate": "GATE-S0-M1",
+          "schedule": [
+            "P1D",
+            "P7D",
+            "P30D"
+          ]
+        },
+        "youtube": {
+          "items": [],
+          "status": "not_used_for_core_implementation"
+        }
+      },
+      {
+        "chinese_supplement": {
+          "items": [],
+          "status": "official_docs_preferred"
+        },
+        "expiry_policy": {
+          "change_policy": "new_revision",
+          "resource_recheck_days": 7
+        },
+        "github_references": {
+          "items": [
+            "https://github.com/actions/checkout",
+            "https://github.com/actions/setup-python"
+          ],
+          "status": "official_actions_only"
+        },
+        "id": "support.D27",
+        "plan_unit_id": "D27",
+        "practice_mapping": {
+          "sre_platform": "把本地工具整理为可复跑工程证据。",
+          "tech_radar": "把资源校验器接入真实 CI 前完成证据汇总。"
+        },
+        "review_policy": {
+          "gate": "GATE-S0-M1",
+          "schedule": [
+            "P1D",
+            "P7D",
+            "P30D"
+          ]
+        },
+        "youtube": {
+          "items": [],
+          "status": "optional_unselected"
+        }
+      },
+      {
+        "chinese_supplement": {
+          "items": [],
+          "status": "forbidden_during_gate"
+        },
+        "expiry_policy": {
+          "change_policy": "new_gate_version_and_release",
+          "resource_recheck_days": 0
+        },
+        "github_references": {
+          "items": [],
+          "status": "hidden_rule_pack_only"
+        },
+        "id": "support.D28",
+        "plan_unit_id": "D28",
+        "practice_mapping": {
+          "sre_platform": "证明能独立扩展一个确定性规则。",
+          "tech_radar": "证明能为资源模型新增规则并第三方复跑。"
+        },
+        "review_policy": {
+          "gate": "GATE-S0-M1",
+          "schedule": [
+            "P7D",
+            "P30D",
+            "P90D"
+          ]
+        },
+        "youtube": {
+          "items": [],
+          "status": "forbidden_during_gate"
+        }
+      }
+    ]
+  }
+}

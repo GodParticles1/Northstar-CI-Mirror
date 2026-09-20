@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.0.0",
+  "items": [
+    {"id": "GATE-S0-W1", "stage_id": "S0", "name": "周门禁 1", "state": "locked", "after_unit": "D07", "requires_independent_reviewer": false, "failure_action": "remediation_2_to_3_units"},
+    {"id": "GATE-S0-W2", "stage_id": "S0", "name": "周门禁 2", "state": "locked", "after_unit": "D14", "requires_independent_reviewer": false, "failure_action": "remediation_2_to_5_units"},
+    {"id": "GATE-S0-W3", "stage_id": "S0", "name": "周门禁 3", "state": "locked", "after_unit": "D21", "requires_independent_reviewer": true, "failure_action": "remediation_2_to_7_units"},
+    {"id": "GATE-S0-M1", "stage_id": "S0", "name": "月度发布门禁", "state": "locked", "after_unit": "D28", "requires_independent_reviewer": true, "failure_action": "block_release_and_remediate"}
+  ]
+}
+

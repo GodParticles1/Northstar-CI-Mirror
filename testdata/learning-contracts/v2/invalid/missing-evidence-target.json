@@ -1,0 +1,26 @@
+{
+  "contract_version": "2.0.0",
+  "resources": [
+    {"kind": "ResourceRef", "repository": "GodParticles1/Forge", "id": "forge.resource.evidence-docs", "revision": 1}
+  ],
+  "evidence_targets": [],
+  "experiment_targets": [],
+  "units": [
+    {
+      "schema_version": "2.0.0",
+      "id": "forge.unit.missing-evidence",
+      "owner_repository": "GodParticles1/Forge",
+      "revision": 1,
+      "status": "DRAFT",
+      "title": "Missing evidence target",
+      "objective": "Demonstrate required Evidence target enforcement.",
+      "prerequisites": [],
+      "resources": [{"kind": "ResourceRef", "repository": "GodParticles1/Forge", "id": "forge.resource.evidence-docs", "revision": 1}],
+      "exercise": {"summary": "Omit the Evidence target.", "deliverables": ["fixture"]},
+      "project_task": {"kind": "practice", "summary": "Validate the fixture."},
+      "acceptance": ["missing Evidence target is rejected"],
+      "refresh": {"checked_at": "2026-08-17", "review_after": "2027-02-17", "triggers": ["contract changes"]},
+      "limitations": ["Invalid fixture only."]
+    }
+  ]
+}

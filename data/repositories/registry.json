@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.3.0",
+  "governance_baseline": "v1",
+  "control_repository": "GodParticles1/Northstar",
+  "repositories": [
+    {"id":"northstar","repository":"GodParticles1/Northstar","profile":"control","status":"active","authority":["cross-repo-governance","repository-registry","shared-contracts","compatibility","cross-repo-adr","context-index"]},
+    {"id":"aegis","repository":"GodParticles1/Aegis","profile":"product","status":"active","authority":["sre-product","sre-control-plane","agent","workflow","diagnosis","controlled-operations","product-architecture"]},
+    {"id":"beacon","repository":"GodParticles1/Beacon","profile":"product","status":"active","authority":["technology-radar-product","signal-ingestion","technology-model","evaluation","human-review","recommendation","product-architecture"]},
+    {"id":"forge","repository":"GodParticles1/Forge","profile":"learning-domain","status":"active","authority":["programming-learning","algorithms","software-engineering-learning"]},
+    {"id":"cortex","repository":"GodParticles1/Cortex","profile":"learning-domain","status":"active","authority":["ai-ml-dl-llm-agent-rl-learning"]},
+    {"id":"nimbus","repository":"GodParticles1/Nimbus","profile":"learning-domain","status":"active","authority":["kubernetes-cloud-native-learning"]},
+    {"id":"proof","repository":"GodParticles1/Proof","profile":"evidence","status":"active","authority":["reproducible-learning-evidence","tests","practice-evidence"]},
+    {"id":"catalyst","repository":"GodParticles1/Catalyst","profile":"experiment","status":"active","authority":["ai-experiments","model-evaluation","gpu-training-inference-experiments"]}
+  ],
+  "isolated_repositories": [
+    "GodParticles1/Setpoint",
+    "GodParticles1/Xrepair",
+    "GodParticles1/firewall-bond-governance"
+  ],
+  "onboarding_rule": "A future repository joins this governance only after explicit user registration in Northstar."
+}
