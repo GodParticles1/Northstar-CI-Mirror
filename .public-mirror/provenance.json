@@ -35,6 +35,6 @@
   "secret_scan": "BUILTIN_PASS;GITLEAKS_UNAVAILABLE",
   "source_private_repo": "GodParticles1/Northstar",
   "source_private_sha": "9400c943c43d7c487931279f4d54cc472959a21a",
-  "source_projection_git_tree_sha256": "a644bdae4781c9fa3767a7dcd9281441c06095f62dc780da5651d4bbeed35137",
+  "source_projection_git_tree_sha256": "02569278a0d0eb09761db80ec1d05a286b4e49aaa766f1bd0e3afc25ec159639",
   "tree_digest_algorithm": "northstar-path-blob-v1"
 }
